@@ -38,8 +38,32 @@ else {
 
 
 if(play==1){
- int hardness,num;
+
+int num;
+int player1=0,player2=0;
+char name1[100] , name2[100];
  system("cls");
+ printf(MAGENTA "\n\n\n\n\t \t \t[1]ONE PLAYER"RESET);
+printf(CYAN "\n\n\t \t \t[2]TWO PLAYER"RESET);
+scanf("%d",&num);
+
+
+while(1){
+if(num==1 || num ==2){
+switch(num){
+case 1:player1=1; printf("\n ENTER YOUR NAME:");  scanf("%s",&name1);
+
+break;
+case 2:player2=1; printf("\n ENTER YOUR NAME:");  scanf("%s",&name1);  printf("\n ENTER YOUR FRIEND NAME:");   scanf("%s",&name2);
+break;
+}
+break;
+}
+else { printf(RED "ERROR ENTER 1 or 2"RESET);
+    scanf("%d",&num);}
+}
+int hardness;
+system("cls");
 printf(GREEN"\n\n\n\n\t \t \t[1]EASY"RESET);
 printf(RED"\n\n\t \t \t[2]HARD"RESET);
 scanf("%d",&hardness);
@@ -57,28 +81,6 @@ else {
 }
 }
 
-
-
-int player1=0,player2=0;
-char name1[100] , name2[100];
- system("cls");
- printf(MAGENTA "\n\n\n\n\t \t \t[1]ONE PLAYER"RESET);
-printf(CYAN "\n\n\t \t \t[2]TWO PLAYER"RESET);
-scanf("%d",&num);
-while(1){
-if(num==1 || num ==2){
-switch(num){
-case 1:player1=1; printf("\n ENTER YOUR NAME:");  scanf("%s",&name1);
-
-break;
-case 2:player2=1; printf("\n ENTER YOUR NAME:");  scanf("%s",&name1);  printf("\n ENTER YOUR FRIEND NAME:");   scanf("%s",&name2);
-break;
-}
-break;
-}
-else { printf(RED "ERROR ENTER 1 or 2"RESET);
-    scanf("%d",&num);}
-}
 if(hardness==1){
 int gd = DETECT, gm;
 	initgraph(&gd, &gm, "C:/TURBOC4/BGI");
@@ -282,5 +284,6 @@ if(exit==1){
 }
 
   }}}
+
 
 
