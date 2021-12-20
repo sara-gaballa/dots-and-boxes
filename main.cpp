@@ -82,20 +82,28 @@ else {
 }
 
 if(hardness==1){
-int gd = DETECT, gm;
-	initgraph(&gd, &gm, "C:/TURBOC4/BGI");
 
-	circle(80,170,25);
-	circle(180,170,25);
-    circle(280,170,25);
+int N=3 ,x ,y;
+struct po{
+int x;int y;
+}cor[10][10];
 
-	circle(80,270,25);
-    circle(180,270,25);
-    circle(280,270,25);
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "C:/TURBOC4/BGI");
+for(int i=0;i<N;i++){
+for(int l=0;l<N;l++){
+cor[i][l].x=l*100+75;
+cor[i][l].y=i*100+175;
 
-    circle(80,370,25);
-    circle(180,370,25);
-    circle(280,370,25);
+}
+}
+  for(int i=0;i<N;i++){
+for(int l=0;l<N;l++){
+circle(cor[i][l].x,cor[i][l].y,20);
+}
+}
+
+
 
     outtextxy(75, 165, "1");
    outtextxy(175, 165, "2");
@@ -140,42 +148,30 @@ int gd = DETECT, gm;
    outtextxy(120, 10, "score:");
    outtextxy(200, 10, "steps:");
 
-
+    getch();
+	closegraph();
 	}
 }
 if(hardness==2){
-int gd = DETECT, gm;
-	initgraph(&gd, &gm, "C:/TURBOC4/BGI");
+int N=5 ,x ,y;
+struct po{
+int x;int y;
+}cor[10][10];
 
-	circle(50,150,20);
-	circle(120,150,20);
-    circle(190,150,20);
-    circle(260,150,20);
-	circle(330,150,20);
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "C:/TURBOC4/BGI");
+for(int i=0;i<N;i++){
+for(int l=0;l<N;l++){
+cor[i][l].x=l*70+50;
+cor[i][l].y=i*70+150;
 
-	circle(50,220,20);
-	circle(120,220,20);
-    circle(190,220,20);
-    circle(260,220,20);
-	circle(330,220,20);
-
-    circle(50,290,20);
-	circle(120,290,20);
-    circle(190,290,20);
-    circle(260,290,20);
-	circle(330,290,20);
-
-	circle(50,360,20);
-	circle(120,360,20);
-    circle(190,360,20);
-    circle(260,360,20);
-	circle(330,360,20);
-
-	circle(50,430,20);
-	circle(120,430,20);
-    circle(190,430,20);
-    circle(260,430,20);
-	circle(330,430,20);
+}
+}
+  for(int i=0;i<N;i++){
+for(int l=0;l<N;l++){
+circle(cor[i][l].x,cor[i][l].y,20);
+}
+}
 
    outtextxy(45, 140, "1");
    outtextxy(115, 140, "2");
@@ -229,6 +225,8 @@ if (num==1){   outtextxy(10, 40, "player1:");
 
     getch();
 	closegraph();
+
+
 }
 
 if (num==2){
@@ -237,10 +235,10 @@ if (num==2){
    outtextxy(120, 10, "score:");
    outtextxy(200, 10, "steps:");
 
-
+    getch();
+	closegraph();
 }}
 if(hardness==1 && num==1){
-
 }
 if(hardness==2 && num==2){
 
@@ -258,7 +256,5 @@ if(exit==1){
 }
 
   }}}
-
-
 
 
