@@ -96,12 +96,8 @@ int gd = DETECT, gm;
     circle(80,370,25);
     circle(180,370,25);
     circle(280,370,25);
-    outtextxy(10, 40, "player1:");
-    outtextxy(10, 70, "computer:");
-    outtextxy(120, 10, "score:");
-    outtextxy(200, 10, "steps:");
 
-   outtextxy(75, 165, "1");
+    outtextxy(75, 165, "1");
    outtextxy(175, 165, "2");
    outtextxy(275, 165, "3");
 
@@ -125,35 +121,27 @@ int gd = DETECT, gm;
     outtextxy(180, 70, "|");
     outtextxy(180, 90, "|");
 
-    outtextxy(10, 55, "-");
-    outtextxy(20, 55, "-");
-    outtextxy(30, 55, "-");
-    outtextxy(40, 55, "-");
-    outtextxy(50, 55, "-");
-    outtextxy(60, 55, "-");
-    outtextxy(70, 55, "-");
-    outtextxy(80, 55, "-");
-    outtextxy(90, 55, "-");
-    outtextxy(100, 55, "-");
-    outtextxy(110, 55, "-");
-    outtextxy(120, 55, "-");
-    outtextxy(130, 55, "-");
-    outtextxy(140, 55, "-");
-    outtextxy(150, 55, "-");
-    outtextxy(160, 55, "-");
-    outtextxy(170, 55, "-");
-    outtextxy(180, 55, "-");
-    outtextxy(190, 55, "-");
-    outtextxy(200, 55, "-");
-    outtextxy(210, 55, "-");
-    outtextxy(220, 55, "-");
-    outtextxy(230, 55, "-");
-    outtextxy(240, 55, "-");
-    outtextxy(250, 55, "-");
+    outtextxy(10, 55, "----------------------------------------------------------------");
+
+
+ if(num==1){
+    outtextxy(10, 40, "player1:");
+    outtextxy(10, 70, "computer:");
+    outtextxy(120, 10, "score:");
+    outtextxy(200, 10, "steps:");
+
 
 
 	getch();
-	closegraph();
+	closegraph();}
+	else if (num==2){
+        outtextxy(10, 40, "player1:");
+   outtextxy(10, 70, "player2:");
+   outtextxy(120, 10, "score:");
+   outtextxy(200, 10, "steps:");
+
+
+	}
 }
 if(hardness==2){
 int gd = DETECT, gm;
@@ -219,12 +207,7 @@ int gd = DETECT, gm;
    outtextxy(250, 420, "24");
    outtextxy(325, 420, "25");
 
-   outtextxy(10, 40, "player1:");
-   outtextxy(10, 70, "player2:");
-   outtextxy(120, 10, "score:");
-   outtextxy(200, 10, "steps:");
-
-    outtextxy(100, 10, "|");
+   outtextxy(100, 10, "|");
     outtextxy(100, 30, "|");
     outtextxy(100, 50, "|");
     outtextxy(100, 70, "|");
@@ -236,42 +219,33 @@ int gd = DETECT, gm;
     outtextxy(180, 70, "|");
     outtextxy(180, 90, "|");
 
-    outtextxy(10, 55, "-");
-    outtextxy(20, 55, "-");
-    outtextxy(30, 55, "-");
-    outtextxy(40, 55, "-");
-    outtextxy(50, 55, "-");
-    outtextxy(60, 55, "-");
-    outtextxy(70, 55, "-");
-    outtextxy(80, 55, "-");
-    outtextxy(90, 55, "-");
-    outtextxy(100, 55, "-");
-    outtextxy(110, 55, "-");
-    outtextxy(120, 55, "-");
-    outtextxy(130, 55, "-");
-    outtextxy(140, 55, "-");
-    outtextxy(150, 55, "-");
-    outtextxy(160, 55, "-");
-    outtextxy(170, 55, "-");
-    outtextxy(180, 55, "-");
-    outtextxy(190, 55, "-");
-    outtextxy(200, 55, "-");
-    outtextxy(210, 55, "-");
-    outtextxy(220, 55, "-");
-    outtextxy(230, 55, "-");
-    outtextxy(240, 55, "-");
-    outtextxy(250, 55, "-");
+    outtextxy(10, 55, "----------------------------------------------------------------");
 
-	getch();
+
+if (num==1){   outtextxy(10, 40, "player1:");
+    outtextxy(10, 70, "computer:");
+    outtextxy(120, 10, "score:");
+    outtextxy(200, 10, "steps:");
+
+    getch();
 	closegraph();
 }
+
+if (num==2){
+   outtextxy(10, 40, "player1:");
+   outtextxy(10, 70, "player2:");
+   outtextxy(120, 10, "score:");
+   outtextxy(200, 10, "steps:");
+
+
+}}
 if(hardness==1 && num==1){
 
 }
 if(hardness==2 && num==2){
 
 }
-if(hardness==1 && num==2){
+if(hardness==1 && num==2){ //easy and two players
 
 }
 if(hardness==2 && num==1){
@@ -284,6 +258,7 @@ if(exit==1){
 }
 
   }}}
+
 
 
 
