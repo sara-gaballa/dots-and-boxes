@@ -1,7 +1,92 @@
-#include <conio.h>
-#include <graphics.h>
-#include <stdio.h>
-#include <dos.h>
+#include "SDL2/SDL.h"
+#include "stdio.h"
+#include"stdlib.h"
+#include"math.h"
+#include "graph.h"
+#include "logic.h"
+SDL_Event event;
+const int GRAPHICS=6;//Aliasing
+int WIDTH=700,HEIGHT=550,LT,N;
+struct qwqw{
+int x;int y;
+}cor[10][10];//coordinates
+struct player{
+char name[50];
+int x=0,y=0,ox=-1,oy=-1;
+}p1,p2;
+bool Toggle;
+void TOGGLE(int key){
+if(key==1073741904){//L
+p1.x--;
+}
+else if(key==1073741905){//D
+p1.y++;
+}
+else if(key==1073741903){//R
+p1.x++;
+}
+else if(key==1073741906){//U
+p1.y--;
+}
+else if(key==32){//hit space
+Toggle=!Toggle;//if(Toggle==1){Toggle=0;}else{Toggle=1;}
+}
+p1.x+=N,p1.x%=N;  //limits
+p1.y+=N,p1.y%=N;  //limits
+}
+void ADD(SDL_Renderer *renderer,int x,int y,int R,int G,int B){   //el fun mesh bt3ml haga
+DrawCircle(renderer,cor[x][y].x,cor[x][y].y,13,13,GRAPHICS,R,G,B);
+}
+void DRAW(SDL_Renderer *renderer,int x,int y){
+for(int i=0;i<N-1;i++){
+for(int l=0;l<N-1;l++){
+if(GRID[i][l]==1)
+SDL_SetRenderDrawColor(renderer,0, 0, 255, 255); //blue
+else if(GRID[i][l]==2)
+SDL_SetRenderDrawColor(renderer,129, 150, 500, 105); //grey
+
+if(GRID[i][l]!=0){  //???
+SDL_Rect A;
+A.x=cor[i][l].x,A.y=cor[i][l].y;
+A.h=cor[i+1][l].x-cor[i][l].x,A.w=cor[i][l+1].y-cor[i][l].y;
+SDL_RenderFillRect(renderer,&A);
+}
+}
+}
+for(int i=0;i<N;i++){
+for(int l=0;l<N;l++){
+if(i==x&&l==y&&Toggle){
+DrawCircle(renderer,cor[i][l].x,cor[i][l].y,15,3,GRAPHICS,255,0,0); //red circle if toggle in on
+}
+else
+DrawCircle(renderer,cor[i][l].x,cor[i][l].y,15,3,GRAPHICS);
+if(i==x&&l==y){
+DrawCircle(renderer,cor[i][l].x,cor[i][l].y,13,13,GRAPHICS,0,0,255); //blue circle
+}
+}
+}
+}
+void upd(SDL_Renderer *renderer){
+SDL_SetRenderDrawColor(renderer,30,10,30,255); //black background
+SDL_RenderClear(renderer);
+if((p1.ox!=p1.x||p1.oy!=p1.y)&&Toggle){
+if(!adj[p1.ox][p1.oy][p1.x][p1.y]&&(abs(p1.ox-p1.x)+abs(p1.oy-p1.y))==1){//Checks if movement adjacent
+CONNECT(p1.ox,p1.oy,p1.x,p1.y);
+UPDGRID(1);
+}
+Toggle=0;
+}
+p1.ox=p1.x,p1.oy=p1.y;
+DRAW(renderer,p1.x,p1.y);
+for(int i=0;i<N;i++){
+for(int l=0;l<N;l++){
+if(adj[i][l][i+1][l]==1)
+DRAWLINE(renderer,cor[i][l].x,cor[i][l].y,cor[i+1][l].x,cor[i+1][l].y,8);
+if(adj[i][l][i][l+1])
+DRAWLINE(renderer,cor[i][l].x,cor[i][l].y,cor[i][l+1].x,cor[i][l+1].y,8);
+}
+}
+}
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[32m"
 #define YELLOW  "\x1b[33m"
@@ -10,251 +95,138 @@
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
 
-int main (int argc, char const *argv[]) {
-  while(1){
-        int play=0,load=0,top=0,exit=0;
+int main(int argc, char* argv[]) {
 system("cls");
 printf("\n\n\n\n");
-    printf( YELLOW "\t \t \t\t \t \tWELCOME DOT AND BOXS" RESET);
-    printf("\n\n\n\n\n\n\n\n\n");
+printf( YELLOW "\t \t \t\t \t \tWELCOME DOT AND BOXS" RESET);
+printf("\n\n\n\n\n\n\n\n\n");
 printf( BLUE "\t \t \t [1] PLAY\n\n" RESET); printf(RED "\t \t \t [2] LOAD GAME\n\n"RESET);
 printf(MAGENTA "\t \t \t [3] TOP TEN\n\n"RESET);
 printf(GREEN "\t \t \t [4] EXIT\n\n"RESET);
 printf("\n");
-char input;
-scanf("%d",&input);
+
+int play , loadgame , top10 , Exit , hardness ,  num ,player1 ,player2 ,name1 ,name2 ,easy, hard ,dim;
+char input[2];
+printf(GREEN "ENTER 1 or 2 or 3 or 4:  " RESET);
+
+scanf("%s",&input);
 while(1){
-    if(input ==1 || input ==2 || input ==3 || input ==4 ){
-switch(input){
-case 1:play=1;break;
-case 2:load=1;break;
-case 3:top=1;break;
-case 4:exit=1;break;
-}break;}
-else {
-    printf(RED"ERROR ENTER 1 OR 2 OR 3 OR 4"RESET); scanf("%d",&input);
+        int a = input[0]-'0';
+   if(a==1){
+    play=1; break;
+   }
+   else if (a==2){
+    loadgame=1; break;
+   }
+   else if (a==3){
+    top10=1; break;
+   }
+   else if (a==4){
+    Exit=1; break;
+   }
+   else
+    printf(RED "Error enter a valid number !" RESET);
+    scanf("%s",&input);
 }
-}
-
-
 if(play==1){
 
-int num;
 int player1=0,player2=0;
 char name1[100] , name2[100];
  system("cls");
  printf(MAGENTA "\n\n\n\n\t \t \t[1]ONE PLAYER"RESET);
 printf(CYAN "\n\n\t \t \t[2]TWO PLAYER"RESET);
 scanf("%d",&num);
-
+}
 
 while(1){
-if(num==1 || num ==2){
-switch(num){
-case 1:player1=1; printf("\n ENTER YOUR NAME:");  scanf("%s",&name1);
+if(num==1){
+player1=1;
+printf(BLUE "\n ENTER YOUR NAME:" RESET);
+scanf("%s",&name1);
+break;}
 
-break;
-case 2:player2=1; printf("\n ENTER YOUR NAME:");  scanf("%s",&name1);  printf("\n ENTER YOUR FRIEND NAME:");   scanf("%s",&name2);
-break;
-}
+else if (num==2){
+player2=1;
+printf("\n ENTER YOUR NAME:");
+scanf("%s",&name1);
+printf("\n ENTER YOUR FRIEND NAME:");
+scanf("%s",&name2);
 break;
 }
 else { printf(RED "ERROR ENTER 1 or 2"RESET);
     scanf("%d",&num);}
 }
-int hardness;
+
 system("cls");
 printf(GREEN"\n\n\n\n\t \t \t[1]EASY"RESET);
 printf(RED"\n\n\t \t \t[2]HARD"RESET);
 scanf("%d",&hardness);
-int easy=0, hard=0;
 while(1){
-if (hardness ==1 || hardness ==2){
-switch(hardness){
-case 1:easy=1;break;
-case 2:hard=1;break;}break;
-}
-
+if (hardness ==1 ){
+easy=1;
+break;}
+else if(hardness ==2){
+hard=1;
+break;}
 else {
     printf(RED "ERROR ENTER 1 or 2"RESET);
     scanf("%d",&hardness);
 }
 }
+printf("\n enter the dim (3 or 4 or 5) : ");
+scanf("%d",&N);
+while (1){
+if(N==3 || N==4 || N==5){break;}
+else {printf(RED"ERROR"RESET);
+        scanf("%d",&N);}}
 
-if(hardness==1){
+while(hardness==1 && num==1){
 
-int N=3 ,x ,y;
-struct po{
-int x;int y;
-}cor[10][10];
-
-    int gd = DETECT, gm;
-    initgraph(&gd, &gm, "C:/TURBOC4/BGI");
+SDL_Window *window;                    // Declare a pointer
+SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
+window = SDL_CreateWindow(
+"An SDL2 window",                  // window title
+SDL_WINDOWPOS_UNDEFINED,           // initial x position
+SDL_WINDOWPOS_UNDEFINED,           // initial y position
+WIDTH,                               // width, in pixels
+HEIGHT,                               // height, in pixels
+SDL_WINDOW_OPENGL                  // flags - see below
+);
+SDL_Renderer* renderer= SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
+SDL_SetRenderDrawColor(renderer,30,10,30,255);
+SDL_RenderClear(renderer);
+LT=SDL_GetTicks();
 for(int i=0;i<N;i++){
 for(int l=0;l<N;l++){
-cor[i][l].x=l*100+75;
-cor[i][l].y=i*100+175;
-
-}
-}
-  for(int i=0;i<N;i++){
-for(int l=0;l<N;l++){
-circle(cor[i][l].x,cor[i][l].y,20);
+cor[i][l].x=i*100+20;
+cor[i][l].y=l*100+80;
 }
 }
 
 
 
-    outtextxy(75, 165, "1");
-   outtextxy(175, 165, "2");
-   outtextxy(275, 165, "3");
-
-   outtextxy(75, 265, "4");
-   outtextxy(175, 265, "5");
-   outtextxy(275, 265, "6");
-
-   outtextxy(75, 365, "7");
-   outtextxy(175, 365, "8");
-   outtextxy(275, 365, "9");
-
-    outtextxy(100, 10, "|");
-    outtextxy(100, 30, "|");
-    outtextxy(100, 50, "|");
-    outtextxy(100, 70, "|");
-    outtextxy(100, 90, "|");
-
-    outtextxy(180, 10, "|");
-    outtextxy(180, 30, "|");
-    outtextxy(180, 50, "|");
-    outtextxy(180, 70, "|");
-    outtextxy(180, 90, "|");
-
-    outtextxy(10, 55, "----------------------------------------------------------------");
-
-
- if(num==1){
-    outtextxy(10, 40, "player1:");
-    outtextxy(10, 70, "computer:");
-    outtextxy(120, 10, "score:");
-    outtextxy(200, 10, "steps:");
-
-
-
-	getch();
-	closegraph();}
-	else if (num==2){
-        outtextxy(10, 40, "player1:");
-   outtextxy(10, 70, "player2:");
-   outtextxy(120, 10, "score:");
-   outtextxy(200, 10, "steps:");
-
-    getch();
-	closegraph();
-	}
-}
-if(hardness==2){
-int N=5 ,x ,y;
-struct po{
-int x;int y;
-}cor[10][10];
-
-    int gd = DETECT, gm;
-    initgraph(&gd, &gm, "C:/TURBOC4/BGI");
-for(int i=0;i<N;i++){
-for(int l=0;l<N;l++){
-cor[i][l].x=l*70+50;
-cor[i][l].y=i*70+150;
-
+SDL_RenderPresent(renderer);
+LT=SDL_GetTicks();
+while(1){
+while(SDL_PollEvent(&event)){
+//SDL_WaitEvent(&event);
+if(event.type==SDL_QUIT)
+exit(0);
+else if(event.type==SDL_KEYDOWN){
+TOGGLE(event.key.keysym.sym);
 }
 }
-  for(int i=0;i<N;i++){
-for(int l=0;l<N;l++){
-circle(cor[i][l].x,cor[i][l].y,20);
+if(SDL_GetTicks()-LT>=1000/60.0){
+upd(renderer);
+SDL_RenderPresent(renderer);
+LT=SDL_GetTicks();
 }
 }
-
-   outtextxy(45, 140, "1");
-   outtextxy(115, 140, "2");
-   outtextxy(185, 140, "3");
-   outtextxy(255, 140, "4");
-   outtextxy(325, 140, "5");
-
-   outtextxy(45, 210, "6");
-   outtextxy(115, 210, "7");
-   outtextxy(185, 210, "8");
-   outtextxy(255, 210, "9");
-   outtextxy(325, 210, "10");
-
-   outtextxy(45, 280, "11");
-   outtextxy(115, 280, "12");
-   outtextxy(185, 280, "13");
-   outtextxy(250, 280, "14");
-   outtextxy(325, 280, "15");
-
-   outtextxy(45, 350, "16");
-   outtextxy(115, 350, "17");
-   outtextxy(185, 350, "18");
-   outtextxy(250, 350, "19");
-   outtextxy(325, 350, "20");
-
-   outtextxy(45, 420, "21");
-   outtextxy(115,420, "22");
-   outtextxy(185, 420, "23");
-   outtextxy(250, 420, "24");
-   outtextxy(325, 420, "25");
-
-   outtextxy(100, 10, "|");
-    outtextxy(100, 30, "|");
-    outtextxy(100, 50, "|");
-    outtextxy(100, 70, "|");
-    outtextxy(100, 90, "|");
-
-    outtextxy(180, 10, "|");
-    outtextxy(180, 30, "|");
-    outtextxy(180, 50, "|");
-    outtextxy(180, 70, "|");
-    outtextxy(180, 90, "|");
-
-    outtextxy(10, 55, "----------------------------------------------------------------");
-
-
-if (num==1){   outtextxy(10, 40, "player1:");
-    outtextxy(10, 70, "computer:");
-    outtextxy(120, 10, "score:");
-    outtextxy(200, 10, "steps:");
-
-    getch();
-	closegraph();
+}
 
 
 }
 
-if (num==2){
-   outtextxy(10, 40, "player1:");
-   outtextxy(10, 70, "player2:");
-   outtextxy(120, 10, "score:");
-   outtextxy(200, 10, "steps:");
-
-    getch();
-	closegraph();
-}}
-if(hardness==1 && num==1){
-}
-if(hardness==2 && num==2){
-
-}
-if(hardness==1 && num==2){ //easy and two players
-
-}
-if(hardness==2 && num==1){
-
-}
-if(exit==1){
-     system("cls");
-
-
-}
-
-  }}}
 
 
