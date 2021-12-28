@@ -4,6 +4,7 @@
 #include"math.h"
 #include "graph.h"
 #include "logic.h"
+int last;
 SDL_Event event;
 const int GRAPHICS=6;//Aliasing
 int WIDTH=700,HEIGHT=550,LT,N;
@@ -13,6 +14,8 @@ int x;int y;
 struct player{
 char name[50];
 int x=0,y=0,ox=-1,oy=-1;
+bool color;
+int score=0;
 }p1,p2;
 bool Toggle;
 void TOGGLE(int key){
@@ -37,15 +40,18 @@ p1.y+=N,p1.y%=N;  //limits
 void ADD(SDL_Renderer *renderer,int x,int y,int R,int G,int B){   //el fun mesh bt3ml haga
 DrawCircle(renderer,cor[x][y].x,cor[x][y].y,13,13,GRAPHICS,R,G,B);
 }
-void DRAW(SDL_Renderer *renderer,int x,int y){
+void DRAW(SDL_Renderer *renderer,int x,int y,int r,int g,int b){
 for(int i=0;i<N-1;i++){
 for(int l=0;l<N-1;l++){
-if(GRID[i][l]==1)
+if(GRID[i][l]==1){
 SDL_SetRenderDrawColor(renderer,0, 0, 255, 255); //blue
-else if(GRID[i][l]==2)
-SDL_SetRenderDrawColor(renderer,129, 150, 500, 105); //grey
-
-if(GRID[i][l]!=0){  //???
+p1.score++;
+}
+else if(GRID[i][l]==2){
+SDL_SetRenderDrawColor(renderer,0, 255, 0,255); //green
+p2.score++;
+}
+if(GRID[i][l]!=0){
 SDL_Rect A;
 A.x=cor[i][l].x,A.y=cor[i][l].y;
 A.h=cor[i+1][l].x-cor[i][l].x,A.w=cor[i][l+1].y-cor[i][l].y;
@@ -61,23 +67,38 @@ DrawCircle(renderer,cor[i][l].x,cor[i][l].y,15,3,GRAPHICS,255,0,0); //red circle
 else
 DrawCircle(renderer,cor[i][l].x,cor[i][l].y,15,3,GRAPHICS);
 if(i==x&&l==y){
-DrawCircle(renderer,cor[i][l].x,cor[i][l].y,13,13,GRAPHICS,0,0,255); //blue circle
+DrawCircle(renderer,cor[i][l].x,cor[i][l].y,13,13,GRAPHICS,r,g,b); //blue or green circle
 }
 }
 }
 }
 void upd(SDL_Renderer *renderer){
+printf("%d\n",(clock()-last)/1000);//time
 SDL_SetRenderDrawColor(renderer,30,10,30,255); //black background
 SDL_RenderClear(renderer);
+bool changed=0;
 if((p1.ox!=p1.x||p1.oy!=p1.y)&&Toggle){
 if(!adj[p1.ox][p1.oy][p1.x][p1.y]&&(abs(p1.ox-p1.x)+abs(p1.oy-p1.y))==1){//Checks if movement adjacent
 CONNECT(p1.ox,p1.oy,p1.x,p1.y);
+if(p1.color==0)
 UPDGRID(1);
+else{
+UPDGRID(2);
+}
+changed=1;
 }
 Toggle=0;
 }
 p1.ox=p1.x,p1.oy=p1.y;
-DRAW(renderer,p1.x,p1.y);
+if(changed){
+p2.ox=p2.x=p1.x;
+p2.oy=p2.y=p1.y;
+swap(p1,p2);
+}
+if(p1.color==1)
+DRAW(renderer,p1.x,p1.y,0,255,0);
+else
+DRAW(renderer,p1.x,p1.y,0,0,255);
 for(int i=0;i<N;i++){
 for(int l=0;l<N;l++){
 if(adj[i][l][i+1][l]==1)
@@ -94,8 +115,9 @@ DRAWLINE(renderer,cor[i][l].x,cor[i][l].y,cor[i][l+1].x,cor[i][l+1].y,8);
 #define MAGENTA "\x1b[35m"
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
-
 int main(int argc, char* argv[]) {
+p1.color=0;//player one blue
+p2.color=1;//player2 green
 system("cls");
 printf("\n\n\n\n");
 printf( YELLOW "\t \t \t\t \t \tWELCOME DOT AND BOXS" RESET);
@@ -129,7 +151,6 @@ while(1){
     scanf("%s",&input);
 }
 if(play==1){
-
 int player1=0,player2=0;
 char name1[100] , name2[100];
  system("cls");
@@ -181,7 +202,7 @@ else {printf(RED"ERROR"RESET);
         scanf("%d",&N);}}
 
 while(hardness==1 && num==1){
-
+last=clock();
 SDL_Window *window;                    // Declare a pointer
 SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
 window = SDL_CreateWindow(
