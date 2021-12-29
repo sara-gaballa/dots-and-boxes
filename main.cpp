@@ -4,7 +4,14 @@
 #include"math.h"
 #include "graph.h"
 #include "logic.h"
-//#include"front-page.h"
+//#include"ai.h"
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[32m"
+#define YELLOW  "\x1b[33m"
+#define BLUE    "\x1b[34m"
+#define MAGENTA "\x1b[35m"
+#define CYAN    "\x1b[36m"
+#define RESET   "\x1b[0m"
 bool changed;
 bool changed2;
 int last;
@@ -43,6 +50,26 @@ p1.y+=N,p1.y%=N;  //limits
 void ADD(SDL_Renderer *renderer,int x,int y,int R,int G,int B){   //el fun mesh bt3ml haga
 DrawCircle(renderer,cor[x][y].x,cor[x][y].y,13,13,GRAPHICS,R,G,B);
 }
+void view(){
+printf(YELLOW"____________________________________\n|"RESET);
+printf(BLUE"\nPLAYER 1:  "RESET);
+for(int i=0;p1.name[i]!='\0' &&p1.name[i]!='\n';i++){
+    printf("%c",p1.name[i]);
+}
+printf(BLUE"\t\tSCORE: %d"RESET,p1.score);
+printf(YELLOW"\n|\n____________________________________\n|"RESET);
+printf(GREEN"\nPLAYER 2:  "RESET);
+for(int i=0;p2.name[i]!='\0' &&p2.name[i]!='\n';i++){
+    printf("%c",p2.name[i]);
+}
+printf(GREEN"\t\tSCORE: %d"RESET,p2.score);
+printf(YELLOW"\n|\n____________________________________\n"RESET);
+printf(RED"\n\n\n\n\n\n\n\n\n\n\nINSTUCTIONS:\n"RESET);
+printf(CYAN"TO MOVE: \npress any of the 4 arrow keys to move along the dots \nTO DRAW:\n press space with arrows"RESET);
+printf(CYAN"for undo press=X\nfor exit the game press esc"RESET);
+
+}
+
 void DRAW(SDL_Renderer *renderer,int x,int y,int r,int g,int b){
 for(int i=0;i<N-1;i++){
 for(int l=0;l<N-1;l++){
@@ -51,11 +78,9 @@ SDL_SetRenderDrawColor(renderer,0, 0, 255, 255); //blue
 p1.score++;
 }
 else if(GRID[i][l]==2){
-SDL_SetRenderDrawColor(renderer,0, 255, 0,255); //green
-p2.score++;
+SDL_SetRenderDrawColor(renderer,0, 255, 0,255); //green1
 }
 if(GRID[i][l]!=0){
-changed2=1;
 SDL_Rect A;
 A.x=cor[i][l].x,A.y=cor[i][l].y;
 A.h=cor[i+1][l].x-cor[i][l].x,A.w=cor[i][l+1].y-cor[i][l].y;
@@ -78,8 +103,7 @@ DrawCircle(renderer,cor[i][l].x,cor[i][l].y,13,13,GRAPHICS,r,g,b); //blue or gre
 }
 
 void upd(SDL_Renderer *renderer){
-
-
+printf("%d",p1.score);
 //printf("%d\n",(clock()-last)/1000);//time
 SDL_SetRenderDrawColor(renderer,30,10,30,255); //black background
 SDL_RenderClear(renderer);
@@ -87,8 +111,9 @@ changed=0;
 if((p1.ox!=p1.x||p1.oy!=p1.y)&&Toggle){
 if(!adj[p1.ox][p1.oy][p1.x][p1.y]&&(abs(p1.ox-p1.x)+abs(p1.oy-p1.y))==1){//Checks if movement adjacent
 CONNECT(p1.ox,p1.oy,p1.x,p1.y);
-if(p1.color==0)
+if(p1.color==0){
 UPDGRID(1);
+}
 else{
 UPDGRID(2);
 }
@@ -115,31 +140,47 @@ DRAWLINE(renderer,cor[i][l].x,cor[i][l].y,cor[i][l+1].x,cor[i][l+1].y,8);
 }
 }
 }
-#define RED     "\x1b[31m"
-#define GREEN   "\x1b[32m"
-#define YELLOW  "\x1b[33m"
-#define BLUE    "\x1b[34m"
-#define MAGENTA "\x1b[35m"
-#define CYAN    "\x1b[36m"
-#define RESET   "\x1b[0m"
-void view(){
-printf(YELLOW"____________________________________\n|"RESET);
-printf(BLUE"\nPLAYER 1:  "RESET);
-for(int i=0;p1.name[i]!='\0' &&p1.name[i]!='\n';i++){
-    printf("%c",p1.name[i]);
+
+void sdl_page(){
+SDL_Window *window;                    // Declare a pointer
+SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
+window = SDL_CreateWindow(
+"An SDL2 window",                  // window title
+SDL_WINDOWPOS_UNDEFINED,           // initial x position
+SDL_WINDOWPOS_UNDEFINED,           // initial y position
+WIDTH,                               // width, in pixels
+HEIGHT,                               // height, in pixels
+SDL_WINDOW_OPENGL                  // flags - see below
+);
+SDL_Renderer* renderer= SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
+SDL_SetRenderDrawColor(renderer,30,10,30,255);
+SDL_RenderClear(renderer);
+LT=SDL_GetTicks();
+for(int i=0;i<N;i++){
+for(int l=0;l<N;l++){
+cor[i][l].x=i*100+20;
+cor[i][l].y=l*100+80;
 }
-printf(BLUE"\t\tSCORE: %d"RESET,p1.score);
-printf(YELLOW"\n|\n____________________________________\n|"RESET);
-printf(GREEN"\nPLAYER 2:  "RESET);
-for(int i=0;p2.name[i]!='\0' &&p2.name[i]!='\n';i++){
-    printf("%c",p2.name[i]);
 }
-printf(GREEN"\t\tSCORE: %d"RESET,p1.score);
-printf(YELLOW"\n|\n____________________________________\n"RESET);
-if(changed2){
-    system("cls");
-    view();
+SDL_RenderPresent(renderer);
+LT=SDL_GetTicks();
+while(1){
+while(SDL_PollEvent(&event)){
+//SDL_WaitEvent(&event);
+if(event.type==SDL_QUIT)
+exit(0);
+else if(event.type==SDL_KEYDOWN){
+TOGGLE(event.key.keysym.sym);
 }
+}
+if(SDL_GetTicks()-LT>=1000/60.0){
+upd(renderer);
+SDL_RenderPresent(renderer);
+LT=SDL_GetTicks();
+}
+}
+
 }
 
 int main(int argc, char* argv[]) {
@@ -155,7 +196,7 @@ printf(GREEN "\t \t \t [4] EXIT\n\n"RESET);
 printf("\n");
 
 int play , loadgame , top10 , Exit , hardness ,  num ,player1 ,player2  ,easy, hard ,dim;
-char input[2],name1[100],name2[100];
+char input[2];
 printf(GREEN "ENTER 1 or 2 or 3 or 4:  " RESET);
 
 scanf("%s",&input);
@@ -195,9 +236,9 @@ break;}
 
 else if (num==2){
 player2=1;
-printf("\n ENTER YOUR NAME:");
+printf(BLUE"\n ENTER YOUR NAME:"RESET);
 scanf("%s",&p1.name);
-printf("\n ENTER YOUR FRIEND NAME:");
+printf(GREEN"\n ENTER YOUR FRIEND NAME:"RESET);
 scanf("%s",&p2.name);
 break;
 }
@@ -244,49 +285,9 @@ scanf("%d",&N);}
 while(hardness==1 && num==2){
 system("cls");
 view();
-//view();
 //last=clock();
-SDL_Window *window;                    // Declare a pointer
-SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
-window = SDL_CreateWindow(
-"An SDL2 window",                  // window title
-SDL_WINDOWPOS_UNDEFINED,           // initial x position
-SDL_WINDOWPOS_UNDEFINED,           // initial y position
-WIDTH,                               // width, in pixels
-HEIGHT,                               // height, in pixels
-SDL_WINDOW_OPENGL                  // flags - see below
-);
-SDL_Renderer* renderer= SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
-SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
-SDL_SetRenderDrawColor(renderer,30,10,30,255);
-SDL_RenderClear(renderer);
-LT=SDL_GetTicks();
-for(int i=0;i<N;i++){
-for(int l=0;l<N;l++){
-cor[i][l].x=i*100+20;
-cor[i][l].y=l*100+80;
+sdl_page();
 }
-}
-SDL_RenderPresent(renderer);
-LT=SDL_GetTicks();
-while(1){
-while(SDL_PollEvent(&event)){
-//SDL_WaitEvent(&event);
-if(event.type==SDL_QUIT)
-exit(0);
-else if(event.type==SDL_KEYDOWN){
-TOGGLE(event.key.keysym.sym);
-}
-}
-if(SDL_GetTicks()-LT>=1000/60.0){
-upd(renderer);
-SDL_RenderPresent(renderer);
-LT=SDL_GetTicks();
-}
-}
-}
-
-
 }
 
 
