@@ -5,6 +5,7 @@
 #include "graph.h"
 #include "logic.h"
 #include"structs.h"
+#include"view.h"
 //#include"ai.h"
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[32m"
@@ -43,27 +44,6 @@ p1.y+=N,p1.y%=N;  //limits
 }
 void ADD(SDL_Renderer *renderer,int x,int y,int R,int G,int B){   //el fun mesh bt3ml haga
 DrawCircle(renderer,cor[x][y].x,cor[x][y].y,13,13,GRAPHICS,R,G,B);
-}
-void view(){
-printf(YELLOW"____________________________________\n|"RESET);
-printf(BLUE"\nPLAYER 1:  "RESET);
-for(int i=0;p1.name[i]!='\0' &&p1.name[i]!='\n';i++){
-    printf("%c",p1.name[i]);
-}
-printf("\n\ntime p1 %d",p1.time%10);
-printf(BLUE"\t\tSCORE: %d"RESET,p1.score);
-printf(YELLOW"\n|\n____________________________________\n|"RESET);
-printf(GREEN"\nPLAYER 2:  "RESET);
-for(int i=0;p2.name[i]!='\0' &&p2.name[i]!='\n';i++){
-    printf("%c",p2.name[i]);
-}
-printf("\n\ntime p2 %d",p2.time%10);
-printf(GREEN"\t\tSCORE: %d"RESET,p2.score);
-printf(YELLOW"\n|\n____________________________________\n"RESET);
-printf(RED"\n\n\n\n\n\n\n\n\n\n\nINSTUCTIONS:\n"RESET);
-printf(CYAN"TO MOVE: \npress any of the 4 arrow keys to move along the dots \nTO DRAW:\n press space with arrows"RESET);
-printf(CYAN"for undo press=X\nfor exit the game press esc"RESET);
-
 }
 
 void DRAW(SDL_Renderer *renderer,int x,int y,int r,int g,int b){
@@ -224,15 +204,15 @@ while(1){
 if(num==1){
 player1=1;
 printf(BLUE "\n ENTER YOUR NAME:" RESET);
-scanf("%s",&p1.name);
+scanf("%s",&play1.name);
 break;}
 
 else if (num==2){
 player2=1;
 printf(BLUE"\n ENTER YOUR NAME:"RESET);
-scanf("%s",&p1.name);
+scanf("%s",&play1.name);
 printf(GREEN"\n ENTER YOUR FRIEND NAME:"RESET);
-scanf("%s",&p2.name);
+scanf("%s",&play2.name);
 break;
 }
 else { printf(RED "ERROR ENTER 1 or 2"RESET);
