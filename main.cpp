@@ -4,6 +4,9 @@
 #include"math.h"
 #include "graph.h"
 #include "logic.h"
+//#include"front-page.h"
+bool changed;
+bool changed2;
 int last;
 SDL_Event event;
 const int GRAPHICS=6;//Aliasing
@@ -52,6 +55,7 @@ SDL_SetRenderDrawColor(renderer,0, 255, 0,255); //green
 p2.score++;
 }
 if(GRID[i][l]!=0){
+changed2=1;
 SDL_Rect A;
 A.x=cor[i][l].x,A.y=cor[i][l].y;
 A.h=cor[i+1][l].x-cor[i][l].x,A.w=cor[i][l+1].y-cor[i][l].y;
@@ -72,11 +76,14 @@ DrawCircle(renderer,cor[i][l].x,cor[i][l].y,13,13,GRAPHICS,r,g,b); //blue or gre
 }
 }
 }
+
 void upd(SDL_Renderer *renderer){
-printf("%d\n",(clock()-last)/1000);//time
+
+
+//printf("%d\n",(clock()-last)/1000);//time
 SDL_SetRenderDrawColor(renderer,30,10,30,255); //black background
 SDL_RenderClear(renderer);
-bool changed=0;
+changed=0;
 if((p1.ox!=p1.x||p1.oy!=p1.y)&&Toggle){
 if(!adj[p1.ox][p1.oy][p1.x][p1.y]&&(abs(p1.ox-p1.x)+abs(p1.oy-p1.y))==1){//Checks if movement adjacent
 CONNECT(p1.ox,p1.oy,p1.x,p1.y);
@@ -115,6 +122,26 @@ DRAWLINE(renderer,cor[i][l].x,cor[i][l].y,cor[i][l+1].x,cor[i][l+1].y,8);
 #define MAGENTA "\x1b[35m"
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
+void view(){
+printf(YELLOW"____________________________________\n|"RESET);
+printf(BLUE"\nPLAYER 1:  "RESET);
+for(int i=0;p1.name[i]!='\0' &&p1.name[i]!='\n';i++){
+    printf("%c",p1.name[i]);
+}
+printf(BLUE"\t\tSCORE: %d"RESET,p1.score);
+printf(YELLOW"\n|\n____________________________________\n|"RESET);
+printf(GREEN"\nPLAYER 2:  "RESET);
+for(int i=0;p2.name[i]!='\0' &&p2.name[i]!='\n';i++){
+    printf("%c",p2.name[i]);
+}
+printf(GREEN"\t\tSCORE: %d"RESET,p1.score);
+printf(YELLOW"\n|\n____________________________________\n"RESET);
+if(changed2){
+    system("cls");
+    view();
+}
+}
+
 int main(int argc, char* argv[]) {
 p1.color=0;//player one blue
 p2.color=1;//player2 green
@@ -127,8 +154,8 @@ printf(MAGENTA "\t \t \t [3] TOP TEN\n\n"RESET);
 printf(GREEN "\t \t \t [4] EXIT\n\n"RESET);
 printf("\n");
 
-int play , loadgame , top10 , Exit , hardness ,  num ,player1 ,player2 ,name1 ,name2 ,easy, hard ,dim;
-char input[2];
+int play , loadgame , top10 , Exit , hardness ,  num ,player1 ,player2  ,easy, hard ,dim;
+char input[2],name1[100],name2[100];
 printf(GREEN "ENTER 1 or 2 or 3 or 4:  " RESET);
 
 scanf("%s",&input);
@@ -152,7 +179,7 @@ while(1){
 }
 if(play==1){
 int player1=0,player2=0;
-char name1[100] , name2[100];
+
  system("cls");
  printf(MAGENTA "\n\n\n\n\t \t \t[1]ONE PLAYER"RESET);
 printf(CYAN "\n\n\t \t \t[2]TWO PLAYER"RESET);
@@ -163,15 +190,15 @@ while(1){
 if(num==1){
 player1=1;
 printf(BLUE "\n ENTER YOUR NAME:" RESET);
-scanf("%s",&name1);
+scanf("%s",&p1.name);
 break;}
 
 else if (num==2){
 player2=1;
 printf("\n ENTER YOUR NAME:");
-scanf("%s",&name1);
+scanf("%s",&p1.name);
 printf("\n ENTER YOUR FRIEND NAME:");
-scanf("%s",&name2);
+scanf("%s",&p2.name);
 break;
 }
 else { printf(RED "ERROR ENTER 1 or 2"RESET);
@@ -206,13 +233,19 @@ if(N==5){
     WIDTH=650,HEIGHT=650;
 }
 while (1){
-if(N==3 || N==4 || N==5){break;}
-else {printf(RED"ERROR"RESET);
-        scanf("%d",&N);}}
+if(N==3 || N==4 || N==5){
+break;
+}
+else {
+printf(RED"ERROR"RESET);
+scanf("%d",&N);}
+}
 
-while(hardness==1 && num==1){
-    system("cls");
-last=clock();
+while(hardness==1 && num==2){
+system("cls");
+view();
+//view();
+//last=clock();
 SDL_Window *window;                    // Declare a pointer
 SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
 window = SDL_CreateWindow(
@@ -234,9 +267,6 @@ cor[i][l].x=i*100+20;
 cor[i][l].y=l*100+80;
 }
 }
-
-
-
 SDL_RenderPresent(renderer);
 LT=SDL_GetTicks();
 while(1){
