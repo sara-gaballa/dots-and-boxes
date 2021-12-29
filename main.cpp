@@ -4,6 +4,7 @@
 #include"math.h"
 #include "graph.h"
 #include "logic.h"
+#include"structs.h"
 //#include"ai.h"
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[32m"
@@ -14,19 +15,12 @@
 #define RESET   "\x1b[0m"
 bool changed;
 bool changed2;
+int s1,s2,s3,s4;
 int last;
 SDL_Event event;
 const int GRAPHICS=6;//Aliasing
 int WIDTH,HEIGHT,LT,N;
-struct coordinates{
-int x;int y;
-}cor[10][10];//coordinates
-struct player{
-char name[50];
-int x=0,y=0,ox=-1,oy=-1;
-bool color;
-int score=0;
-}p1,p2;
+
 bool Toggle;
 void TOGGLE(int key){
 if(key==1073741904){//L
@@ -56,12 +50,14 @@ printf(BLUE"\nPLAYER 1:  "RESET);
 for(int i=0;p1.name[i]!='\0' &&p1.name[i]!='\n';i++){
     printf("%c",p1.name[i]);
 }
+printf("\n\ntime p1 %d",p1.time%10);
 printf(BLUE"\t\tSCORE: %d"RESET,p1.score);
 printf(YELLOW"\n|\n____________________________________\n|"RESET);
 printf(GREEN"\nPLAYER 2:  "RESET);
 for(int i=0;p2.name[i]!='\0' &&p2.name[i]!='\n';i++){
     printf("%c",p2.name[i]);
 }
+printf("\n\ntime p2 %d",p2.time%10);
 printf(GREEN"\t\tSCORE: %d"RESET,p2.score);
 printf(YELLOW"\n|\n____________________________________\n"RESET);
 printf(RED"\n\n\n\n\n\n\n\n\n\n\nINSTUCTIONS:\n"RESET);
@@ -75,7 +71,7 @@ for(int i=0;i<N-1;i++){
 for(int l=0;l<N-1;l++){
 if(GRID[i][l]==1){
 SDL_SetRenderDrawColor(renderer,0, 0, 255, 255); //blue
-p1.score++;
+
 }
 else if(GRID[i][l]==2){
 SDL_SetRenderDrawColor(renderer,0, 255, 0,255); //green1
@@ -103,7 +99,7 @@ DrawCircle(renderer,cor[i][l].x,cor[i][l].y,13,13,GRAPHICS,r,g,b); //blue or gre
 }
 
 void upd(SDL_Renderer *renderer){
-printf("%d",p1.score);
+
 //printf("%d\n",(clock()-last)/1000);//time
 SDL_SetRenderDrawColor(renderer,30,10,30,255); //black background
 SDL_RenderClear(renderer);
@@ -111,13 +107,9 @@ changed=0;
 if((p1.ox!=p1.x||p1.oy!=p1.y)&&Toggle){
 if(!adj[p1.ox][p1.oy][p1.x][p1.y]&&(abs(p1.ox-p1.x)+abs(p1.oy-p1.y))==1){//Checks if movement adjacent
 CONNECT(p1.ox,p1.oy,p1.x,p1.y);
-if(p1.color==0){
-UPDGRID(1);
-}
-else{
-UPDGRID(2);
-}
+if(!UPDGRID(p1.color+1)){
 changed=1;
+}
 }
 Toggle=0;
 }
@@ -127,10 +119,12 @@ p2.ox=p2.x=p1.x;
 p2.oy=p2.y=p1.y;
 swap(p1,p2);
 }
-if(p1.color==1)
+if(p1.color==1){
 DRAW(renderer,p1.x,p1.y,0,255,0);
-else
+}
+else{
 DRAW(renderer,p1.x,p1.y,0,0,255);
+}
 for(int i=0;i<N;i++){
 for(int l=0;l<N;l++){
 if(adj[i][l][i+1][l]==1)
@@ -140,7 +134,6 @@ DRAWLINE(renderer,cor[i][l].x,cor[i][l].y,cor[i][l+1].x,cor[i][l+1].y,8);
 }
 }
 }
-
 void sdl_page(){
 SDL_Window *window;                    // Declare a pointer
 SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2

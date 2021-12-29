@@ -1,5 +1,6 @@
 #ifndef LOGIC_H_INCLUDED
 #define LOGIC_H_INCLUDED
+#include"structs.h"
 bool adj[10][10][10][10];
 int GRID[10][10];//Sees which square is taken by who
 void CONNECT(int x1,int y1,int x2,int y2){
@@ -18,6 +19,14 @@ flag=1;
 GRID[i][l]=p;
 }
 }
+}
+if(flag){
+    if(p==1){
+        p1.score++;
+    }
+    else{
+        p2.score++;
+    }
 }
 return flag;
 }
