@@ -7,8 +7,8 @@
 int last;
 SDL_Event event;
 const int GRAPHICS=6;//Aliasing
-int WIDTH=700,HEIGHT=550,LT,N;
-struct qwqw{
+int WIDTH,HEIGHT,LT,N;
+struct coordinates{
 int x;int y;
 }cor[10][10];//coordinates
 struct player{
@@ -196,12 +196,22 @@ else {
 }
 printf("\n enter the dim (3 or 4 or 5) : ");
 scanf("%d",&N);
+if(N==3){
+    WIDTH=350,HEIGHT=350;
+}
+if(N==4){
+    WIDTH=550,HEIGHT=550;
+}
+if(N==5){
+    WIDTH=650,HEIGHT=650;
+}
 while (1){
 if(N==3 || N==4 || N==5){break;}
 else {printf(RED"ERROR"RESET);
         scanf("%d",&N);}}
 
 while(hardness==1 && num==1){
+    system("cls");
 last=clock();
 SDL_Window *window;                    // Declare a pointer
 SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
