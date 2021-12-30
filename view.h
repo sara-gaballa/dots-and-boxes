@@ -14,25 +14,25 @@ printf(BLUE"\nPLAYER 1:  "RESET);
 for(int i=0;play1.name[i]!='\0' && play1.name[i]!='\n';i++){
     printf("%c",play1.name[i]);
 }
-printf("\n\ntime p1 %d",p1.time%10);
-printf(BLUE"\t\tSCORE: %d"RESET,play1.score);
+printf(BLUE"\n\nSCORE: %d"RESET,play1.score);
+printf(BLUE"\n\nMOVES :  %d"RESET,play1.moves);
 printf(YELLOW"\n|\n____________________________________\n|"RESET);
 printf(GREEN"\nPLAYER 2:  "RESET);
 for(int i=0;play2.name[i]!='\0' &&play2.name[i]!='\n';i++){
     printf("%c",play2.name[i]);
 }
-printf("\n\ntime p2 %d",p2.time%10);
-printf(GREEN"\t\tSCORE: %d"RESET,play2.score);
-printf(YELLOW"\n|\n____________________________________\n"RESET);
-printf("\n\n\n\nnum of lines left   =   %d",num_of_lines);
 
-printf("\n\nPLAYER 1 MOVES :  %d",play1.moves);
-printf("\n\nPLAYER 2 MOVES :  %d",play2.moves);
+printf(GREEN"\n\nSCORE: %d"RESET,play2.score);
+printf(GREEN"\n\nMOVES :  %d"RESET,play2.moves);
+printf(YELLOW"\n|\n____________________________________\n"RESET);
+printf(MAGENTA"\n\n\nNUM OF LINES LEFT =   %d"RESET,num_of_lines );
+
+
 /*printf(CYAN"for undo press=X\nfor exit the game press esc"RESET);
 printf(RED"\n\n\n\n\n\n\n\n\n\n\nINSTUCTIONS:\n"RESET);
 printf(CYAN"TO MOVE: \npress any of the 4 arrow keys to move along the dots \nTO DRAW:\n press space with arrows"RESET);
 */
-printf("\n\nTIMMMMMME    %d",timenew);
+printf(RED"\n\nTIMMMMMME    %d"RESET,timenew);
 if(num_of_lines==0){
     if(play1.score>play2.score){
         system("cls");
