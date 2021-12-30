@@ -7,15 +7,12 @@
 #include"structs.h"
 #include"view.h"
 //#include"ai.h"
-
 bool changed;
 bool changed2;
 int s1,s2,s3,s4;
 int last;
 SDL_Event event;
 const int GRAPHICS=6;//Aliasing
-int WIDTH,HEIGHT,LT,N;
-
 bool Toggle;
 void TOGGLE(int key){
 if(key==1073741904){//L
@@ -73,8 +70,7 @@ DrawCircle(renderer,cor[i][l].x,cor[i][l].y,13,13,GRAPHICS,r,g,b); //blue or gre
 }
 
 void upd(SDL_Renderer *renderer){
-
-//printf("%d\n",(clock()-last)/1000);//time
+timenew=(clock()-last)/1000;//time
 SDL_SetRenderDrawColor(renderer,30,10,30,255); //black background
 SDL_RenderClear(renderer);
 changed=0;
@@ -101,10 +97,12 @@ DRAW(renderer,p1.x,p1.y,0,0,255);
 }
 for(int i=0;i<N;i++){
 for(int l=0;l<N;l++){
-if(adj[i][l][i+1][l]==1)
+if(adj[i][l][i+1][l]==1){
 DRAWLINE(renderer,cor[i][l].x,cor[i][l].y,cor[i+1][l].x,cor[i+1][l].y,8);
-if(adj[i][l][i][l+1])
+}
+if(adj[i][l][i][l+1]){
 DRAWLINE(renderer,cor[i][l].x,cor[i][l].y,cor[i][l+1].x,cor[i][l+1].y,8);
+}
 }
 }
 }
@@ -277,10 +275,11 @@ printf(RED"ERROR"RESET);
 scanf("%s",&dim[0]);
 }
 }}
+num_of_lines=2*N*(N-1);
 while( player2==1){
 system("cls");
 view();
-//last=clock();
+last=clock();
 sdl_page();
 }
 }

@@ -24,10 +24,34 @@ for(int i=0;play2.name[i]!='\0' &&play2.name[i]!='\n';i++){
 printf("\n\ntime p2 %d",p2.time%10);
 printf(GREEN"\t\tSCORE: %d"RESET,play2.score);
 printf(YELLOW"\n|\n____________________________________\n"RESET);
+printf("\n\n\n\nnum of lines left   =   %d",num_of_lines);
+
+printf("\n\nPLAYER 1 MOVES :  %d",play1.moves);
+printf("\n\nPLAYER 2 MOVES :  %d",play2.moves);
+/*printf(CYAN"for undo press=X\nfor exit the game press esc"RESET);
 printf(RED"\n\n\n\n\n\n\n\n\n\n\nINSTUCTIONS:\n"RESET);
 printf(CYAN"TO MOVE: \npress any of the 4 arrow keys to move along the dots \nTO DRAW:\n press space with arrows"RESET);
-printf(CYAN"for undo press=X\nfor exit the game press esc"RESET);
-
+*/
+printf("\n\nTIMMMMMME    %d",timenew);
+if(num_of_lines==0){
+    if(play1.score>play2.score){
+        system("cls");
+        printf("\n\n\t\tCONGRATLATIONS ");
+        for(int i=0;play1.name[i]!='\0' && play1.name[i]!='\n';i++){
+        printf("%c",play1.name[i]);
+        }
+        //return 0;
+    }else if (play1.score<play2.score){
+        system("cls");
+        printf("\n\n\t\tCONGRATLATIONS ");
+        for(int i=0;play2.name[i]!='\0' && play2.name[i]!='\n';i++){
+        printf("%c",play2.name[i]);
+        }
+    }else{
+            system("cls");
+           printf("\n\n\t\tDRAW ");
+    }
+}
 }
 
 #endif // VIEW_H_INCLUDED
