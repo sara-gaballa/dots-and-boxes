@@ -7,6 +7,7 @@
 #include"structs.h"
 #include"view.h"
 #include"ai.h"
+#include"save1.h"
 bool changed;
 int s1,s2,s3,s4;
 int last;
@@ -25,6 +26,10 @@ p1.x++;
 }
 else if(key==1073741906){//U
 p1.y--;
+}
+else if(key==27){//esc
+        save1();
+        exit(0);
 }
 else if(key==32){//hit space
 Toggle=!Toggle;//if(Toggle==1){Toggle=0;}else{Toggle=1;}
@@ -201,18 +206,29 @@ while(1){
     play=1; break;
    }
    else if (a==2){
-    loadgame=1; break;
+    loadgame=1;
+     save1();
+     break;
    }
    else if (a==3){
     TOP10=1; break;
    }
    else if (a==4){
-    Exit=1; break;
+    Exit=1;
+    system("cls");
+    exit(0);
    }
    else
     printf(RED "Error enter a valid number !" RESET);
     scanf("%s",&input);
 }
+while(loadgame==1){
+
+    system("cls");
+    save1();
+    view();
+    break;}
+
 if(play==1){
 int player1=0,player2=0;
 
@@ -220,8 +236,8 @@ int player1=0,player2=0;
  printf(MAGENTA "\n\n\n\n\t \t \t[1]ONE PLAYER"RESET);
 printf(CYAN "\n\n\t \t \t[2]TWO PLAYER"RESET);
 scanf("%s",&num[0]);
-}
 
+}
 while(1){
 int b = num[0]-'0';
 if(b==1){
@@ -337,11 +353,11 @@ last=clock();
 sdl_page();
 }
 if(player1==1){
-
 system("cls");
 view();
 last=clock();
 sdl_page();
+
 }
 }
 

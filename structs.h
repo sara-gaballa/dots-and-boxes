@@ -1,6 +1,6 @@
 #ifndef STRUCTS_H_INCLUDED
 #define STRUCTS_H_INCLUDED
-int play , loadgame , TOP10 , Exit ,  player1 ,player2  ,easy=0, hard=0 , b , f ,g;
+int play , loadgame=0 , TOP10 , Exit ,  player1 ,player2  ,easy=0, hard=0 , b , f ,g;
 int timenew=0;
 int WIDTH,HEIGHT,LT,N;
 int num_of_lines=0;
