@@ -18,7 +18,6 @@ printf(BLUE"\n\nSCORE: %d"RESET,play1.score);
 printf(BLUE"\n\nMOVES :  %d"RESET,play1.moves);
 printf(YELLOW"\n|\n____________________________________\n|"RESET);
 printf(GREEN"\nPLAYER 2:  "RESET);
-
 if(player1==1){
 strncpy(play2.name,"computer",50);
 for(int i=0;play2.name[i]!='\0' &&play2.name[i]!='\n';i++){
@@ -40,11 +39,11 @@ printf(YELLOW"\n|\n____________________________________\n"RESET);
 printf(MAGENTA"\n\n\nNUM OF LINES LEFT =   %d"RESET,num_of_lines );
 }
 
-printf(CYAN"for undo press=X\nfor exit the game press esc"RESET);
+/*printf(CYAN"for undo press=X\nfor exit the game press esc"RESET);
 printf(RED"\n\n\n\n\n\n\n\n\n\n\nINSTUCTIONS:\n"RESET);
-printf(CYAN"TO MOVE: \npress any of the 4 arrow keys to move along the dots \nTO DRAW:\n press space with arrows"RESET);
+printf(CYAN"TO MOVE: \npress any of the 4 arrow keys to move along the dots \nTO DRAW:\n press space with arrows"RESET);*/
 printf(RED"\n\nTIMMMMMME    %d"RESET,timenew);
-/*if(num_of_lines==0){
+if(num_of_lines==0){
         FILE *top10;
         top10=fopen("top10.txt","a");
     if(play1.score>play2.score){
@@ -69,7 +68,7 @@ printf(RED"\n\nTIMMMMMME    %d"RESET,timenew);
            printf("\n\n\t\tDRAW ");
     }
     fclose(top10);
-}*/
+}
 
 }
 

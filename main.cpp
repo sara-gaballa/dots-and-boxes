@@ -90,6 +90,7 @@ if(comp.y2>comp.y1){
     return 1073741905;//down
 }
 }
+
 void upd(SDL_Renderer *renderer){
 timenew=(clock()-last)/1000;//time
 SDL_SetRenderDrawColor(renderer,30,10,30,255); //black background
@@ -181,6 +182,8 @@ LT=SDL_GetTicks();
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
 int main(int argc, char* argv[]) {
+FILE *broadsave;
+broadsave = fopen("broadsave.txt","w");
 FILE *fb;
 fb=fopen("top10.txt","a");
 fclose(fb);
@@ -223,12 +226,18 @@ while(1){
     scanf("%s",&input);
 }
 while(loadgame==1){
-
+        player1=1;
     system("cls");
     save1();
     view();
-    break;}
-
+    if(N==3){
+    WIDTH=350,HEIGHT=350; }
+    if(N==4){
+    WIDTH=550,HEIGHT=550; }
+   sdl_page();
+   break;
+}
+while(play==1){
 if(play==1){
 int player1=0,player2=0;
 
@@ -304,7 +313,7 @@ else {
     scanf("%s",&hardness[0]);
 }
 }
-if(easy==1){
+if(easy==1 ||loadgame==1){
       printf("\n enter the dim (3 or 4) : ");
       scanf("%s",&dim[0]);
 while (1){
@@ -322,7 +331,7 @@ printf(RED"ERROR"RESET);
 scanf("%s",&dim[0]);
 }}}
 
-if(hard==1){
+if(hard==1 || loadgame==1){
       printf("\n enter the dim (5 or 6 or 7) : ");
       scanf("%s",&dim[0]);
     while(1){
@@ -345,7 +354,6 @@ scanf("%s",&dim[0]);
 }
 }}
 num_of_lines=2*N*(N-1);
-
 if( player2==1){
 system("cls");
 view();
@@ -361,5 +369,6 @@ sdl_page();
 }
 }
 
+}
 
 
