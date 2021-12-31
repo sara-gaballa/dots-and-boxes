@@ -18,15 +18,27 @@ printf(BLUE"\n\nSCORE: %d"RESET,play1.score);
 printf(BLUE"\n\nMOVES :  %d"RESET,play1.moves);
 printf(YELLOW"\n|\n____________________________________\n|"RESET);
 printf(GREEN"\nPLAYER 2:  "RESET);
+
+if(player1==1){
+strncpy(play2.name,"computer",50);
 for(int i=0;play2.name[i]!='\0' &&play2.name[i]!='\n';i++){
     printf("%c",play2.name[i]);
 }
-
 printf(GREEN"\n\nSCORE: %d"RESET,play2.score);
 printf(GREEN"\n\nMOVES :  %d"RESET,play2.moves);
 printf(YELLOW"\n|\n____________________________________\n"RESET);
 printf(MAGENTA"\n\n\nNUM OF LINES LEFT =   %d"RESET,num_of_lines );
 
+}
+else if(player2==1){
+for(int i=0;play2.name[i]!='\0' &&play2.name[i]!='\n';i++){
+    printf("%c",play2.name[i]);
+}
+printf(GREEN"\n\nSCORE: %d"RESET,play2.score);
+printf(GREEN"\n\nMOVES :  %d"RESET,play2.moves);
+printf(YELLOW"\n|\n____________________________________\n"RESET);
+printf(MAGENTA"\n\n\nNUM OF LINES LEFT =   %d"RESET,num_of_lines );
+}
 
 /*printf(CYAN"for undo press=X\nfor exit the game press esc"RESET);
 printf(RED"\n\n\n\n\n\n\n\n\n\n\nINSTUCTIONS:\n"RESET);
@@ -44,7 +56,6 @@ if(num_of_lines==0){
         }
          fprintf(top10,"%s",play1.name);
          fprintf(top10,"%d",play1.score);
-        //return 0;
     }else if (play1.score<play2.score){
         system("cls");
         printf("\n\n\t\tCONGRATLATIONS ");
@@ -53,7 +64,8 @@ if(num_of_lines==0){
         }
         fprintf(top10,"%s",play2.name);
         fprintf(top10,"%d",play2.score);
-    }else{
+    }
+    else{
             system("cls");
            printf("\n\n\t\tDRAW ");
     }

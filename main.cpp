@@ -6,11 +6,8 @@
 #include "logic.h"
 #include"structs.h"
 #include"view.h"
-#include <ctype.h>
-//#include"ai.h"
-
+#include"ai.h"
 bool changed;
-bool changed2;
 int s1,s2,s3,s4;
 int last;
 SDL_Event event;
@@ -19,15 +16,19 @@ bool Toggle;
 void TOGGLE(int key){
 if(key==1073741904){//L
 p1.x--;
+printf("left\n");
 }
 else if(key==1073741905){//D
 p1.y++;
+printf("D\n");
 }
 else if(key==1073741903){//R
 p1.x++;
+printf("R\n");
 }
 else if(key==1073741906){//U
 p1.y--;
+printf("U\n");
 }
 else if(key==32){//hit space
 Toggle=!Toggle;//if(Toggle==1){Toggle=0;}else{Toggle=1;}
@@ -44,7 +45,6 @@ for(int i=0;i<N-1;i++){
 for(int l=0;l<N-1;l++){
 if(GRID[i][l]==1){
 SDL_SetRenderDrawColor(renderer,0, 0, 255, 255); //blue
-
 }
 else if(GRID[i][l]==2){
 SDL_SetRenderDrawColor(renderer,0, 255, 0,255); //green1
@@ -70,7 +70,25 @@ DrawCircle(renderer,cor[i][l].x,cor[i][l].y,13,13,GRAPHICS,r,g,b); //blue or gre
 }
 }
 }
-
+int converter(){
+compplay();
+p1.x=comp.x1;
+p1.y=comp.y1;
+p1.ox=comp.x1;
+p1.oy=comp.y1;
+if(comp.x2<comp.x1){
+    return 1073741904;//left
+}
+if(comp.x2>comp.x1){
+    return 1073741903;//right
+}
+if(comp.y2<comp.y1){
+    return 1073741906;//up
+}
+if(comp.y2>comp.y1){
+    return 1073741905;//down
+}
+}
 void upd(SDL_Renderer *renderer){
 timenew=(clock()-last)/1000;//time
 SDL_SetRenderDrawColor(renderer,30,10,30,255); //black background
@@ -133,6 +151,11 @@ cor[i][l].y=l*100+80;
 SDL_RenderPresent(renderer);
 LT=SDL_GetTicks();
 while(1){
+if(p1.color==1 && player1==1){
+    Toggle=1;
+    TOGGLE(converter());
+}
+else{
 while(SDL_PollEvent(&event)){
 //SDL_WaitEvent(&event);
 if(event.type==SDL_QUIT)
@@ -141,11 +164,12 @@ else if(event.type==SDL_KEYDOWN){
 TOGGLE(event.key.keysym.sym);
 }
 }
-if(SDL_GetTicks()-LT>=1000/60.0){
+}
+//if(SDL_GetTicks()-LT>=1000/60.0){
 upd(renderer);
 SDL_RenderPresent(renderer);
 LT=SDL_GetTicks();
-}
+
 }
 }
 #define RED     "\x1b[31m"
@@ -170,7 +194,7 @@ printf(MAGENTA "\t \t \t [3] TOP TEN\n\n"RESET);
 printf(GREEN "\t \t \t [4] EXIT\n\n"RESET);
 printf("\n");
 
-int play , loadgame , TOP10 , Exit ,  player1 ,player2  ,easy=0, hard=0 , b , f ,g;
+
 char input[2] ,num[2] ,hardness[2] ,dim[2] ;
 printf(GREEN "ENTER 1 or 2 or 3 or 4:  " RESET);
 
@@ -268,7 +292,6 @@ else {
     scanf("%s",&hardness[0]);
 }
 }
-
 if(easy==1){
       printf("\n enter the dim (3 or 4) : ");
       scanf("%s",&dim[0]);
@@ -310,7 +333,15 @@ scanf("%s",&dim[0]);
 }
 }}
 num_of_lines=2*N*(N-1);
-while( player2==1){
+
+if( player2==1){
+system("cls");
+view();
+last=clock();
+sdl_page();
+}
+if(player1==1){
+
 system("cls");
 view();
 last=clock();
