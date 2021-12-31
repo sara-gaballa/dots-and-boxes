@@ -34,12 +34,16 @@ printf(CYAN"TO MOVE: \npress any of the 4 arrow keys to move along the dots \nTO
 */
 printf(RED"\n\nTIMMMMMME    %d"RESET,timenew);
 if(num_of_lines==0){
+        FILE *top10;
+        top10=fopen("top10.txt","a");
     if(play1.score>play2.score){
         system("cls");
         printf("\n\n\t\tCONGRATLATIONS ");
         for(int i=0;play1.name[i]!='\0' && play1.name[i]!='\n';i++){
         printf("%c",play1.name[i]);
         }
+         fprintf(top10,"%s",play1.name);
+         fprintf(top10,"%d",play1.score);
         //return 0;
     }else if (play1.score<play2.score){
         system("cls");
@@ -47,11 +51,15 @@ if(num_of_lines==0){
         for(int i=0;play2.name[i]!='\0' && play2.name[i]!='\n';i++){
         printf("%c",play2.name[i]);
         }
+        fprintf(top10,"%s",play2.name);
+        fprintf(top10,"%d",play2.score);
     }else{
             system("cls");
            printf("\n\n\t\tDRAW ");
     }
+    fclose(top10);
 }
+
 }
 
 #endif // VIEW_H_INCLUDED

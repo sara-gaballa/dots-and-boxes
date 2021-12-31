@@ -8,6 +8,7 @@
 #include"view.h"
 #include <ctype.h>
 //#include"ai.h"
+
 bool changed;
 bool changed2;
 int s1,s2,s3,s4;
@@ -155,6 +156,9 @@ LT=SDL_GetTicks();
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
 int main(int argc, char* argv[]) {
+/*FILE *fb;
+fb=fopen("top10.txt","a");
+fclose(fb);*/
 p1.color=0;//player one blue
 p2.color=1;//player2 green
 system("cls");
@@ -219,27 +223,27 @@ else if (b==2){
 player2=1;
 printf(BLUE"\n ENTER YOUR NAME:"RESET);
 int x=1;
+
 while( x==1){
         //open
-        FILE *top10;
-        top10=fopen("top10.txt","w");
-gets(play1.name);
+fgets(play1.name,50,stdin);
 for(int i=0;play1.name[i]!='\0' &&play1.name[i]!='\n';i++){
     if(play1.name[i]!='\0' && play1.name[i]!='\n'){x=0;
-       fprintf(top10,"%s",play1.name[i]);
-    break; }}
-fclose(top10);
+    break;
+    }
+    }
 }
 printf(GREEN"\n ENTER YOUR FRIEND NAME:"RESET);
 int z=1;
 while( z==1){
     //open
-gets(play2.name);
+fgets(play2.name,100,stdin);
 for(int i=0;play2.name[i]!='\0' &&play2.name[i]!='\n';i++){
     if(play2.name[i]!='\0' && play2.name[i]!='\n'){
         //save
             z=0; break; }}
 }
+
 //close
 break;
 }

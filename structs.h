@@ -17,6 +17,9 @@ bool color;
 
 int time=0;
 }p1,p2;
-
+struct top10{
+char name[100];
+int score=0;
+}top1,top2,top3,top4,top5,top6,top7,top8,top9,top10;
 
 #endif // STRUCTS_H_INCLUDED
