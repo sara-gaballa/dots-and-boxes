@@ -156,9 +156,9 @@ LT=SDL_GetTicks();
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
 int main(int argc, char* argv[]) {
-/*FILE *fb;
+FILE *fb;
 fb=fopen("top10.txt","a");
-fclose(fb);*/
+fclose(fb);
 p1.color=0;//player one blue
 p2.color=1;//player2 green
 system("cls");
