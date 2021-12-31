@@ -48,7 +48,6 @@ while(1){
     }
     if(x2 >=0 && x2<N &&y2 >=0 && y2<N){
     if(!adj[x][y][x2][y2]){
-    printf("%d\n%d\n%d\n%d\n",x,y,x2,y2);
     comp.x1=x,comp.y1=y,comp.x2=x2,comp.y2=y2;
     return;
     }

@@ -16,19 +16,15 @@ bool Toggle;
 void TOGGLE(int key){
 if(key==1073741904){//L
 p1.x--;
-printf("left\n");
 }
 else if(key==1073741905){//D
 p1.y++;
-printf("D\n");
 }
 else if(key==1073741903){//R
 p1.x++;
-printf("R\n");
 }
 else if(key==1073741906){//U
 p1.y--;
-printf("U\n");
 }
 else if(key==32){//hit space
 Toggle=!Toggle;//if(Toggle==1){Toggle=0;}else{Toggle=1;}
