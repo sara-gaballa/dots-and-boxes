@@ -6,6 +6,7 @@
 #include "logic.h"
 #include"structs.h"
 #include"view.h"
+#include <ctype.h>
 //#include"ai.h"
 bool changed;
 bool changed2;
@@ -165,7 +166,7 @@ printf(MAGENTA "\t \t \t [3] TOP TEN\n\n"RESET);
 printf(GREEN "\t \t \t [4] EXIT\n\n"RESET);
 printf("\n");
 
-int play , loadgame , top10 , Exit ,  player1 ,player2  ,easy=0, hard=0 , b , f ,g;
+int play , loadgame , TOP10 , Exit ,  player1 ,player2  ,easy=0, hard=0 , b , f ,g;
 char input[2] ,num[2] ,hardness[2] ,dim[2] ;
 printf(GREEN "ENTER 1 or 2 or 3 or 4:  " RESET);
 
@@ -179,7 +180,7 @@ while(1){
     loadgame=1; break;
    }
    else if (a==3){
-    top10=1; break;
+    TOP10=1; break;
    }
    else if (a==4){
     Exit=1; break;
@@ -202,15 +203,44 @@ int b = num[0]-'0';
 if(b==1){
 player1=1;
 printf(BLUE "\n ENTER YOUR NAME:" RESET);
-scanf("%s",&play1.name);
+int y=1;
+while( y==1){
+        //open
+gets(play1.name);
+for(int i=0;play1.name[i]!='\0' &&play1.name[i]!='\n';i++){
+    if(play1.name[i]!='\0' && play1.name[i]!='\n'){
+            //save
+            y=0; break; }}
+}
+//close
 break;}
 
 else if (b==2){
 player2=1;
 printf(BLUE"\n ENTER YOUR NAME:"RESET);
-scanf("%s",&play1.name);
+int x=1;
+while( x==1){
+        //open
+        FILE *top10;
+        top10=fopen("top10.txt","w");
+gets(play1.name);
+for(int i=0;play1.name[i]!='\0' &&play1.name[i]!='\n';i++){
+    if(play1.name[i]!='\0' && play1.name[i]!='\n'){x=0;
+       fprintf(top10,"%s",play1.name[i]);
+    break; }}
+fclose(top10);
+}
 printf(GREEN"\n ENTER YOUR FRIEND NAME:"RESET);
-scanf("%s",&play2.name);
+int z=1;
+while( z==1){
+    //open
+gets(play2.name);
+for(int i=0;play2.name[i]!='\0' &&play2.name[i]!='\n';i++){
+    if(play2.name[i]!='\0' && play2.name[i]!='\n'){
+        //save
+            z=0; break; }}
+}
+//close
 break;
 }
 else { printf(RED "ERROR ENTER 1 or 2"RESET);
