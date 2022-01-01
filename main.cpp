@@ -251,31 +251,34 @@ while(loadgame==1){
     //1player1=1;
     system("cls");
     printf("choose [1]save1 ,[2]save2,[3]save3");
-    scanf("%d",&LO);
+    char in[2];
+    scanf("%s",&in);
+    while(1){
+            LO=in[0]-'0';
     if(LO==1){
-        system("cls");
-         save1();
-    }
-    if(LO==2){
             system("cls");
-         save2();
+            save1();
+            break;
     }
-    if(LO==3){
-
-        system("cls");
-        save3();
+    else if(LO==2){
+            system("cls");
+            save2();
+            break;
     }
+    else if(LO==3){
+            system("cls");
+            save3();
+            break;
+    }
+    else {
+        printf("ERROR");
+        scanf("%s",&in);
+    }}
     view();
     if(N==3){
     WIDTH=350,HEIGHT=350; }
     if(N==4){
     WIDTH=550,HEIGHT=550; }
-    if(N==5){
-    WIDTH=650,HEIGHT=650;}
-    if(N==6){
-    WIDTH=750,HEIGHT=750;}
-    if(N==7){
-    WIDTH=750,HEIGHT=750;}
     sdl_page();
    break;
 }
