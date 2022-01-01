@@ -8,6 +8,7 @@
 #include"view.h"
 #include"ai.h"
 #include"save1.h"
+#include"string.h"
 bool changed;
 int s1,s2,s3,s4;
 int last;
@@ -182,8 +183,6 @@ LT=SDL_GetTicks();
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
 int main(int argc, char* argv[]) {
-FILE *broadsave;
-broadsave = fopen("broadsave.txt","w");
 FILE *fb;
 fb=fopen("top10.txt","a");
 fclose(fb);
@@ -226,7 +225,7 @@ while(1){
     scanf("%s",&input);
 }
 while(loadgame==1){
-        player1=1;
+    //1player1=1;
     system("cls");
     save1();
     view();
@@ -234,7 +233,7 @@ while(loadgame==1){
     WIDTH=350,HEIGHT=350; }
     if(N==4){
     WIDTH=550,HEIGHT=550; }
-   sdl_page();
+    sdl_page();
    break;
 }
 while(play==1){
@@ -253,6 +252,14 @@ if(b==1){
 player1=1;
 printf(BLUE "\n ENTER YOUR NAME:" RESET);
 int y=1;
+play2.name[0]='c';
+play2.name[1]='o';
+play2.name[2]='m';
+play2.name[3]='p';
+play2.name[4]='u';
+play2.name[5]='t';
+play2.name[6]='e';
+play2.name[7]='r';
 while( y==1){
         //open
 gets(play1.name);

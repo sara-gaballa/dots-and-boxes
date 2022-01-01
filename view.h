@@ -19,7 +19,6 @@ printf(BLUE"\n\nMOVES :  %d"RESET,play1.moves);
 printf(YELLOW"\n|\n____________________________________\n|"RESET);
 printf(GREEN"\nPLAYER 2:  "RESET);
 if(player1==1){
-strncpy(play2.name,"computer",50);
 for(int i=0;play2.name[i]!='\0' &&play2.name[i]!='\n';i++){
     printf("%c",play2.name[i]);
 }
