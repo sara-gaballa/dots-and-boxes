@@ -10,8 +10,9 @@
 #include"save1.h"
 #include"string.h"
 #include"save2.h"
+#include"save3.h"
 bool changed;
-int Save1=0,Save2=0,Save3=0,S=0,LO=0;
+int S=0,LO=0;//for loading and saving
 int s1,s2,s3,s4;
 int last;
 SDL_Event event;
@@ -31,23 +32,26 @@ else if(key==1073741906){//U
 p1.y--;
 }
 else if(key==27){//esc
-        printf("choose [1]save1 , [2]save2 , [3]save3");
-        scanf("%d",&S);
+        SDL_Quit();
+
+        printf(CYAN"\nchoose [1]save1 , [2]save2 , [3]save3"RESET);
+        char out[2];
+        scanf("%s",&out);
+        while(1){
+                 S=out[0]-'0';
         if(S==1){
-            //Save1=1;
             save1();
             exit(0);
-
         }
-         if(S==2){
-            //Save2=1;
+         else if(S==2){
             save2();
             exit(0);
-
         }
-         if(S==3){
-           // Save3=1;
+         else if(S==3){
+            save3();
             exit(0);
+        }
+        else printf(RED"ERROE"RESET); scanf("%s",&out);
         }
 
 }
@@ -249,7 +253,7 @@ while(loadgame==1){
     printf("choose [1]save1 ,[2]save2,[3]save3");
     scanf("%d",&LO);
     if(LO==1){
-            system("cls");
+        system("cls");
          save1();
     }
     if(LO==2){
@@ -257,14 +261,21 @@ while(loadgame==1){
          save2();
     }
     if(LO==3){
-            system("cls");
-        //save3();
+
+        system("cls");
+        save3();
     }
     view();
     if(N==3){
     WIDTH=350,HEIGHT=350; }
     if(N==4){
     WIDTH=550,HEIGHT=550; }
+    if(N==5){
+    WIDTH=650,HEIGHT=650;}
+    if(N==6){
+    WIDTH=750,HEIGHT=750;}
+    if(N==7){
+    WIDTH=750,HEIGHT=750;}
     sdl_page();
    break;
 }

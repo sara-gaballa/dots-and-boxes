@@ -1,14 +1,7 @@
 #ifndef SAVE1_H_INCLUDED
 #define SAVE1_H_INCLUDED
-#define RED     "\x1b[31m"
-#define GREEN   "\x1b[32m"
-#define YELLOW  "\x1b[33m"
-#define BLUE    "\x1b[34m"
-#define MAGENTA "\x1b[35m"
-#define CYAN    "\x1b[36m"
-#define RESET   "\x1b[0m"
 #include "structs.h"
- save1(){
+ void save1(){
 if (loadgame==0){
 FILE *save1;
 save1=fopen("save1.txt","w");
@@ -25,19 +18,19 @@ fprintf(save1,"%d\n",N);
 fprintf(save1,"%d\n",player1);
 fprintf(save1,"%d\n",player2);
 fclose(save1);
-FILE *broadsave;
-broadsave = fopen("broadsave.txt","w");
+FILE *broadsave1;
+broadsave1 = fopen("broadsave1.txt","w");
 for(int i=0;i<10;i++){
 for(int l=0;l<10;l++)
 for(int x=0;x<10;x++)
 for(int z=0;z<10;z++)
-fprintf(broadsave,"%d\n",adj[i][l][x][z]);
+fprintf(broadsave1,"%d\n",adj[i][l][x][z]);
 }
-fprintf(broadsave,"\n");
+fprintf(broadsave1,"\n");
 for(int i=0;i<9;i++){
 for(int l=0;l<9;l++)
-fprintf(broadsave,"%d\n",GRID[i][l]);}
-fclose(broadsave);
+fprintf(broadsave1,"%d\n",GRID[i][l]);}
+fclose(broadsave1);
 }
 if(loadgame==1){
 
@@ -50,18 +43,18 @@ fscanf(save1,"%d",&N);
 fscanf(save1,"%d",&player1);
 fscanf(save1,"%d",&player2);
 fclose(save1);
-FILE *broadsave;
-broadsave = fopen("broadsave.txt","r");
+FILE *broadsave1;
+broadsave1 = fopen("broadsave1.txt","r");
 for(int i=0;i<10;i++){
 for(int l=0;l<10;l++)
 for(int x=0;x<10;x++)
 for(int z=0;z<10;z++)
-fscanf(broadsave,"%d",&adj[i][l][x][z]);
+fscanf(broadsave1,"%d",&adj[i][l][x][z]);
 }
 for(int i=0;i<9;i++){
 for(int l=0;l<9;l++)
-fscanf(broadsave,"%d",&GRID[i][l]);}
-fclose(broadsave);
+fscanf(broadsave1,"%d",&GRID[i][l]);}
+fclose(broadsave1);
 
 }}
 #endif
