@@ -9,7 +9,9 @@
 #include"ai.h"
 #include"save1.h"
 #include"string.h"
+#include"save2.h"
 bool changed;
+int Save1=0,Save2=0,Save3=0,S=0,LO=0;
 int s1,s2,s3,s4;
 int last;
 SDL_Event event;
@@ -29,8 +31,25 @@ else if(key==1073741906){//U
 p1.y--;
 }
 else if(key==27){//esc
-        save1();
-        exit(0);
+        printf("choose [1]save1 , [2]save2 , [3]save3");
+        scanf("%d",&S);
+        if(S==1){
+            //Save1=1;
+            save1();
+            exit(0);
+
+        }
+         if(S==2){
+            //Save2=1;
+            save2();
+            exit(0);
+
+        }
+         if(S==3){
+           // Save3=1;
+            exit(0);
+        }
+
 }
 else if(key==32){//hit space
 Toggle=!Toggle;//if(Toggle==1){Toggle=0;}else{Toggle=1;}
@@ -227,7 +246,20 @@ while(1){
 while(loadgame==1){
     //1player1=1;
     system("cls");
-    save1();
+    printf("choose [1]save1 ,[2]save2,[3]save3");
+    scanf("%d",&LO);
+    if(LO==1){
+            system("cls");
+         save1();
+    }
+    if(LO==2){
+            system("cls");
+         save2();
+    }
+    if(LO==3){
+            system("cls");
+        //save3();
+    }
     view();
     if(N==3){
     WIDTH=350,HEIGHT=350; }

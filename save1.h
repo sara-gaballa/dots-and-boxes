@@ -8,7 +8,7 @@
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
 #include "structs.h"
-save1(){
+ save1(){
 if (loadgame==0){
 FILE *save1;
 save1=fopen("save1.txt","w");
