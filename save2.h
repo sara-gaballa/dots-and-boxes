@@ -1,10 +1,12 @@
 #ifndef SAVE2_H_INCLUDED
 #define SAVE2_H_INCLUDED
 #include "structs.h"
+
 void save2(){
 if (loadgame==0){
 FILE *save2;
 save2=fopen("save2.txt","w");
+
 fprintf(save2,play1.name);
 if(player1==1){
 fprintf(save2,"\n");}
@@ -36,6 +38,10 @@ if(loadgame==1){
 
 FILE *save2;
 save2=fopen("save2.txt","r");
+if(save2 == NULL){
+    printf(RED"\n\n\n\t\t\t\tERROR SAVE A GAME FIRST"RESET);
+    exit(0);
+}
 fgets(play1.name,50,save2);
 fgets(play2.name,50,save2);
 fscanf(save2,"%d%d%d%d%d%d",&play1.score,&play2.score,&play1.moves,&play2.moves,&num_of_lines,&timenew);

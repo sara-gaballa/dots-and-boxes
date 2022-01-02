@@ -36,6 +36,11 @@ if(loadgame==1){
 
 FILE *save3;
 save3=fopen("save3.txt","r");
+if(save3 == NULL){
+    printf(RED"\n\n\n\t\t\t\tERROR SAVE A GAME FIRST"RESET);
+
+    exit(0);
+}
 fgets(play1.name,50,save3);
 fgets(play2.name,50,save3);
 fscanf(save3,"%d%d%d%d%d%d",&play1.score,&play2.score,&play1.moves,&play2.moves,&num_of_lines,&timenew);

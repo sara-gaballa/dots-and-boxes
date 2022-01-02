@@ -50,12 +50,14 @@ if(num_of_lines==0){
         for(int i=0;play1.name[i]!='\0' && play1.name[i]!='\n';i++){
         printf(MAGENTA"%c"RESET,play1.name[i]);
         }
-         SDL_Quit();
+        printf( YELLOW"\t\tYOUR SCORE IS: %d"RESET,play1.score);
+        SDL_Quit();
     }else if (play1.score<play2.score &&strcmp(compt,play2.name)!=0){
          printf(CYAN"\n\n\n\n\n\n\n\t\tCONGRATLATIONS "RESET);
         for(int i=0;play2.name[i]!='\0' && play2.name[i]!='\n';i++){
         printf(MAGENTA"%c"RESET,play2.name[i]);
         }
+        printf(YELLOW"\t\tYOUR SCORE IS: %d"RESET,play2.score);
         SDL_Quit();
     }
     else if(play1.score==play2.score){
@@ -71,6 +73,21 @@ if(num_of_lines==0){
 }
 if(num_of_lines==0 && (play1.score+play2.score==(N-1)*(N-1))){
     top();
+    char SARA[2];
+    printf(RED"\npress 1 to return "RESET);
+    printf(RED"\npress 0 to exit "RESET);
+    scanf("%s",&SARA);
+    while(1){
+        int O = SARA[0]-'0';
+    if(O == 1){
+    main(_argc , _argv);
+    break;}
+    else if ( O == 0){
+        system("taskkill/IM cb_console_runner.exe");
+    }
+    else { printf("ERROE");
+     scanf("%s",&SARA);}
+    }
 }
 
 }

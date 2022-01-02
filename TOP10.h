@@ -7,7 +7,7 @@ FILE *top10;
 int i=0,x;
 top10=fopen("top10.txt","a+");
 if(play1.score>play2.score){
-       for(int i=0;i<10;i++){
+       for(int i=0;i<50;i++){
         if(topn[i].score==0){
         strncpy(topn[i].name,play1.name,50);
         topn[i].score=play1.score;
@@ -64,7 +64,7 @@ for(int i=0;i<50;i++){
 }}
 void sorting(){
 for(int i=0;i<50;i++){
-        for(int x=0;x<10;x++){
+        for(int x=0;x<50;x++){
             if(topn[i].score>topn[x].score){
                 swap(topn[x],topn[i]);
             }

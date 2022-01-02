@@ -12,6 +12,8 @@
 #include"save2.h"
 #include"save3.h"
 #include"TOP10.h"
+int main();
+void sdl_page(void);
 bool changed;
 int S=0,LO=0;//for loading and saving
 int s1,s2,s3,s4;
@@ -34,7 +36,6 @@ p1.y--;
 }
 else if(key==27){//esc
         SDL_Quit();
-
         printf(CYAN"\nchoose [1]save1 , [2]save2 , [3]save3"RESET);
         char out[2];
         scanf("%s",&out);
@@ -42,19 +43,34 @@ else if(key==27){//esc
                  S=out[0]-'0';
         if(S==1){
             save1();
-            exit(0);
+            system("taskkill/IM cb_console_runner.exe");
         }
          else if(S==2){
             save2();
-            exit(0);
+            system("taskkill/IM cb_console_runner.exe");
         }
          else if(S==3){
             save3();
-            exit(0);
+            system("taskkill/IM cb_console_runner.exe");
         }
         else printf(RED"ERROE"RESET); scanf("%s",&out);
         }
 
+}
+else if(key==117){//u ==undo
+PP=UNDO.top();
+DISCONNECT(PP.x1,PP.y1,PP.x2,PP.y2,PP.PLR);
+//if(p1.color!=PP.PLR){
+//swap(p1,p2);}
+REDO.push(PP);
+UNDO.pop();
+}
+else if(key== 114){//r == redo
+PP=REDO.top();
+UNDO.push(PP);
+CONNECT(PP.x1,PP.y1,PP.x2,PP.y2,PP.PLR);
+REDO.pop();
+//sdl_page();
 }
 else if(key==32){//hit space
 Toggle=!Toggle;//if(Toggle==1){Toggle=0;}else{Toggle=1;}
@@ -118,7 +134,7 @@ if(comp.y2>comp.y1){
 
 void upd(SDL_Renderer *renderer){
 timenew=(clock()-last)/1000;//time
-SDL_SetRenderDrawColor(renderer,30,10,30,255); //black background
+SDL_SetRenderDrawColor(renderer,10,10,10,255); //black background
 SDL_RenderClear(renderer);
 changed=0;
 if((p1.ox!=p1.x||p1.oy!=p1.y)&&Toggle){
@@ -132,8 +148,9 @@ Toggle=0;
 }
 p1.ox=p1.x,p1.oy=p1.y;
 if(changed){
+if(!(p1.color==1 && player1==1)){
 p2.ox=p2.x=p1.x;
-p2.oy=p2.y=p1.y;
+p2.oy=p2.y=p1.y;}
 swap(p1,p2);
 }
 if(p1.color==1){
@@ -157,7 +174,7 @@ void sdl_page(){
 SDL_Window *window;                    // Declare a pointer
 SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
 window = SDL_CreateWindow(
-"An SDL2 window",                  // window title
+"DOTS AND BOXES",                  // window title
 SDL_WINDOWPOS_UNDEFINED,           // initial x position
 SDL_WINDOWPOS_UNDEFINED,           // initial y position
 WIDTH,                               // width, in pixels
@@ -185,8 +202,29 @@ if(p1.color==1 && player1==1){
 else{
 while(SDL_PollEvent(&event)){
 //SDL_WaitEvent(&event);
-if(event.type==SDL_QUIT)
-exit(0);
+if(event.type==SDL_QUIT){
+        SDL_Quit();
+        printf(CYAN"\nchoose [1]save1 , [2]save2 , [3]save3"RESET);
+        char out[2];
+        scanf("%s",&out);
+        while(1){
+                 S=out[0]-'0';
+        if(S==1){
+            save1();
+            exit(0);
+        }
+         else if(S==2){
+            save2();
+            exit(0);
+        }
+         else if(S==3){
+            save3();
+            exit(0);
+        }
+        else printf(RED"ERROE"RESET); scanf("%s",&out);
+        }
+}
+
 else if(event.type==SDL_KEYDOWN){
 TOGGLE(event.key.keysym.sym);
 }
@@ -210,9 +248,15 @@ int main(int argc, char* argv[]) {
 p1.color=0;//player one blue
 p2.color=1;//player2 green
 system("cls");
+printf(YELLOW"\n\n  *****************************************************************************************************************\n"RESET);
+  printf(YELLOW"    ______   _______  _______  ______    _______  _______  ______     ______   _______  _     _  _______   ______ \n"RESET);
+    printf(GREEN"   (______) (_______)(_______)/ _____)  (_______)(_______)(______)   (____  \\ (_______)(_)   (_)(_______) / _____) \n"RESET);
+    printf(BLUE"    _     _  _     _     _   ( (____     _______  _     _  _     _    ____)  ) _     _    ___    _____   ( (____ \n"RESET);
+    printf(CYAN"   | |   | || |   | |   | |   \\____ \\   |  ___  || |   | || |   | |  |  __  ( | |   | |  |   |  |  ___)   \\____ \\\n"RESET);
+    printf(MAGENTA"   | |__/ / | |___| |   | |   _____) )  | |   | || |   | || |__/ /   | |__)  )| |___| | / / \\ \\ | |_____  _____) ) \n"RESET);
+    printf(RED"   |_____/   \\_____/    |_|  (______/   |_|   |_||_|   |_||_____/    |______/  \\_____/ |_|   |_||_______)(______/ \n"RESET);
+    printf(YELLOW"\n  *****************************************************************************************************************\n"RESET);
 printf("\n\n\n\n");
-printf( YELLOW "\t \t \t\t \t \tWELCOME DOT AND BOXS" RESET);
-printf("\n\n\n\n\n\n\n\n\n");
 printf( BLUE "\t \t \t [1] PLAY\n\n" RESET); printf(RED "\t \t \t [2] LOAD GAME\n\n"RESET);
 printf(MAGENTA "\t \t \t [3] TOP TEN\n\n"RESET);
 printf(GREEN "\t \t \t [4] EXIT\n\n"RESET);
@@ -238,7 +282,7 @@ while(1){
    else if (a==4){
     Exit=1;
     system("cls");
-    exit(0);
+   main(argc , argv);
    }
    else
     printf(RED "Error enter a valid number !" RESET);
@@ -254,7 +298,21 @@ while(TOP10==1){
     printf(RED"[%d]"RESET,i+1);
     printf(YELLOW"\nNAME: %sSCORE: %d\n"RESET,topn[i].name,topn[i].score);
     }
-
+char SARA[2];
+    printf("\npress 1 to return ");
+    printf("\npress 0 to exit ");
+    scanf("%s",&SARA);
+    while(1){
+        int O = SARA[0]-'0';
+    if(O == 1){
+    main(_argc , _argv);
+    break;}
+    else if ( O == 0){
+        system("taskkill/IM cb_console_runner.exe");
+    }
+    else { printf("ERROE");
+     scanf("%s",&SARA);}
+    }
     break;
 }
 while(loadgame==1){
@@ -397,7 +455,7 @@ while (1){
        g = dim[0]-'0';
 if(g==3 || g==4){
     if(g==3){
-    WIDTH=350,HEIGHT=350; N=3;break;}
+    WIDTH=300,HEIGHT=350; N=3;break;}
 
     if(g==4){
     WIDTH=550,HEIGHT=550; N=4; break;}
