@@ -248,7 +248,7 @@ while(TOP10==1){
     top();
     system("cls");
     printf(GREEN"\n\t\t\t\t\t TOP 10 LIST\n"RESET);
-    //overwrriten();
+    overwrriten();
     sorting();
     for(int i=0;i<10;i++){
     printf(RED"[%d]"RESET,i+1);

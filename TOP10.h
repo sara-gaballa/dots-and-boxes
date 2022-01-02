@@ -14,7 +14,7 @@ if(play1.score>play2.score){
         break;}
         }
 fprintf(top10,topn[i].name);
-fprintf(top10,"%d\n",topn[i].score);
+fprintf(top10,"\n%d\n",topn[i].score);
 fclose(top10);
 }
 if(play1.score<play2.score && strcmp(compt,play2.name)!=0){
@@ -26,7 +26,7 @@ if(play1.score<play2.score && strcmp(compt,play2.name)!=0){
         break;}
         }
 fprintf(top10,topn[i].name);
-fprintf(top10,"%d\n",topn[i].score);
+fprintf(top10,"\n%d\n",topn[i].score);
 fclose(top10);
 }
 
@@ -41,22 +41,22 @@ fscanf(top10,"%d",&topn[i].score);}
 fclose(top10);
 }
 }
-char temp[50];
+char temp[50]={};
 void overwrriten(){//lsa
 for(int i=0;i<50;i++){
-        for(int x=0;x<10;x++){
-            if(strcmp(topn[i].name,topn[x].name)==0){
+        for(int x=i+1;x<50;x++){
+            if(strcmp(topn[i].name,topn[x].name)==0 && strcmp(topn[i].name,temp)!=0 && strcmp(topn[x].name,temp)!=0){
                  if(topn[i].score>topn[x].score){
                     topn[x].score=0;
-                    strncpy(temp,topn[x].name,50);
+                    strncpy(topn[x].name,temp,50);
                  }
                  else if (topn[i].score<topn[x].score){
                     topn[i].score=0;
-                    strncpy(temp,topn[i].name,50);
+                    strncpy(topn[i].name,temp,50);
                  }
                  else if (topn[i].score==topn[x].score){
-                    topn[i].score=0;
-                    strncpy(temp,topn[i].name,50);
+                    topn[x].score=0;
+                    strncpy(topn[x].name,temp,50);
                  }
             }
 
