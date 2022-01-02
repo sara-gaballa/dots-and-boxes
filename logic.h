@@ -40,8 +40,9 @@ GRID[i][l]=p;
     else if(p==2){
         play2.score=play2.score+flag;
         system("cls");
-       view();
+        view();
     }
+
 
 return flag;
 }

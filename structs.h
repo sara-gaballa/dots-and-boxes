@@ -1,6 +1,8 @@
 #ifndef STRUCTS_H_INCLUDED
 #define STRUCTS_H_INCLUDED
 int play , loadgame=0 , TOP10 , Exit ,  player1 ,player2  ,easy=0, hard=0 , b , f ,g;
+char compt[50];
+
 int timenew=0;
 int WIDTH,HEIGHT,LT,N;
 int num_of_lines=0;
@@ -18,10 +20,11 @@ bool color;
 
 int time=0;
 }p1,p2;
-struct top10{
-char name[100];
+struct tops{
+char name[50];
 int score=0;
-}top1,top2,top3,top4,top5,top6,top7,top8,top9,top10;
+};
+struct tops topn[50];
 struct compmoves{
 int x1,y1,x2,y2;
 }comp;

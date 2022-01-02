@@ -11,6 +11,7 @@
 #include"string.h"
 #include"save2.h"
 #include"save3.h"
+#include"TOP10.h"
 bool changed;
 int S=0,LO=0;//for loading and saving
 int s1,s2,s3,s4;
@@ -206,9 +207,6 @@ LT=SDL_GetTicks();
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
 int main(int argc, char* argv[]) {
-FILE *fb;
-fb=fopen("top10.txt","a");
-fclose(fb);
 p1.color=0;//player one blue
 p2.color=1;//player2 green
 system("cls");
@@ -232,7 +230,6 @@ while(1){
    }
    else if (a==2){
     loadgame=1;
-     save1();
      break;
    }
    else if (a==3){
@@ -247,10 +244,21 @@ while(1){
     printf(RED "Error enter a valid number !" RESET);
     scanf("%s",&input);
 }
-while(loadgame==1){
-    //1player1=1;
+while(TOP10==1){
+    top();
     system("cls");
-    printf("choose [1]save1 ,[2]save2,[3]save3");
+    //overwrriten();
+    sorting();
+    for(int i=0;i<10;i++){
+    printf(CYAN"\n%s%d\n"RESET,topn[i].name,topn[i].score);
+    }
+
+    break;
+}
+while(loadgame==1){
+
+    system("cls");
+    printf(CYAN"choose [1]save1 ,[2]save2,[3]save3"RESET);
     char in[2];
     scanf("%s",&in);
     while(1){
@@ -279,6 +287,12 @@ while(loadgame==1){
     WIDTH=350,HEIGHT=350; }
     if(N==4){
     WIDTH=550,HEIGHT=550; }
+    if(N==5){
+    WIDTH=650,HEIGHT=650; }
+    if(N==6){
+    WIDTH=750,HEIGHT=750;}
+    if(N==7){
+    WIDTH=750,HEIGHT=750;}
     sdl_page();
    break;
 }
@@ -306,6 +320,14 @@ play2.name[4]='u';
 play2.name[5]='t';
 play2.name[6]='e';
 play2.name[7]='r';
+compt[0]='c';
+compt[1]='o';
+compt[2]='m';
+compt[3]='p';
+compt[4]='u';
+compt[5]='t';
+compt[6]='e';
+compt[7]='r';
 while( y==1){
         //open
 gets(play1.name);
