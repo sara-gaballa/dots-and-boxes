@@ -455,7 +455,7 @@ while (1){
        g = dim[0]-'0';
 if(g==3 || g==4){
     if(g==3){
-    WIDTH=300,HEIGHT=350; N=3;break;}
+    WIDTH=350,HEIGHT=350; N=3;break;}
 
     if(g==4){
     WIDTH=550,HEIGHT=550; N=4; break;}
