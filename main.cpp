@@ -250,6 +250,7 @@ while(TOP10==1){
     //overwrriten();
     sorting();
     for(int i=0;i<10;i++){
+    printf(RED"[%d]"RESET,i+1);
     printf(CYAN"\n%s%d\n"RESET,topn[i].name,topn[i].score);
     }
 
