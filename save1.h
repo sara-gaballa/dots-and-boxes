@@ -4,7 +4,7 @@
  void save1(){
 if (loadgame==0){
 FILE *save1;
-save1=fopen("save1.txt","wr");
+save1=fopen("save1.txt","w");
 fprintf(save1,play1.name);
 if(player1==1){
 fprintf(save1,"\n");}
