@@ -12,7 +12,6 @@
 #include"save2.h"
 #include"save3.h"
 #include"TOP10.h"
-int main();
 void sdl_page(void);
 bool changed;
 int S=0,LO=0;//for loading and saving
@@ -245,6 +244,7 @@ LT=SDL_GetTicks();
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
 int main(int argc, char* argv[]) {
+    int a=0;
 p1.color=0;//player one blue
 p2.color=1;//player2 green
 system("cls");
@@ -263,12 +263,12 @@ printf(GREEN "\t \t \t [4] EXIT\n\n"RESET);
 printf("\n");
 
 
-char input[2] ,num[2] ,hardness[2] ,dim[2] ;
+char input[2]={} ,num[2]={} ,hardness[2]={} ,dim[2]={} ;
 printf(GREEN "ENTER 1 or 2 or 3 or 4:  " RESET);
 
 scanf("%s",&input);
 while(1){
-        int a = input[0]-'0';
+         a = input[0]-'0';
    if(a==1){
     play=1; break;
    }
@@ -280,9 +280,8 @@ while(1){
     TOP10=1; break;
    }
    else if (a==4){
-    Exit=1;
-    system("cls");
-   main(argc , argv);
+    system("taskkill/IM cb_console_runner.exe");
+        exit(0);
    }
    else
     printf(RED "Error enter a valid number !" RESET);
@@ -305,10 +304,13 @@ char SARA[2];
     while(1){
         int O = SARA[0]-'0';
     if(O == 1){
+    TOP10=0;
+    //a=1;
     main(_argc , _argv);
     break;}
     else if ( O == 0){
         system("taskkill/IM cb_console_runner.exe");
+        exit(0);
     }
     else { printf("ERROE");
      scanf("%s",&SARA);}

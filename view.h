@@ -80,10 +80,13 @@ if(num_of_lines==0 && (play1.score+play2.score==(N-1)*(N-1))){
     while(1){
         int O = SARA[0]-'0';
     if(O == 1){
+     play=0;
+     SDL_Quit();
     main(_argc , _argv);
     break;}
     else if ( O == 0){
         system("taskkill/IM cb_console_runner.exe");
+        exit(0);
     }
     else { printf("ERROE");
      scanf("%s",&SARA);}
