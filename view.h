@@ -82,8 +82,8 @@ if(num_of_lines==0 && (play1.score+play2.score==(N-1)*(N-1))){
     while(1){
         int O = SARA[0]-'0';
     if(O == 1){
-     play=0;
-     clean();
+    play=0;
+    clean();
     main(_argc , _argv);
     break;}
     else if ( O == 0){

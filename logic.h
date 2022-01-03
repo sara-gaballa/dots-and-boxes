@@ -49,6 +49,7 @@ GRID[i][l]=p;
 return flag;
 }
 void clean(){
+timenew=0;
 p1.x=0;
 p1.y=0;
 p2.x=0;
