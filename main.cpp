@@ -12,14 +12,11 @@
 #include"save2.h"
 #include"save3.h"
 #include"TOP10.h"
-void sdl_page(void);
 bool changed;
 int S=0,LO=0;//for loading and saving
-int s1=0,s2=0,s3=0,s4=0;
 int last=0;
 SDL_Event event;
 const int GRAPHICS=6;//Aliasing
-bool Toggle=0;
 void TOGGLE(int key){
 if(key==1073741904){//L
 p1.x--;
@@ -50,6 +47,7 @@ else if(key==27){//esc
             while (1){
                     int F=jk[0]-'0';
             if(F==1){
+                clean();
                 main(_argc , _argv); break;
             }
             else if (F==0){
@@ -72,6 +70,7 @@ else if(key==27){//esc
             while (1){
                     int F=jk[0]-'0';
             if(F==1){
+                clean();
                 main(_argc , _argv); break;
             }
             else if (F==0){
@@ -94,6 +93,7 @@ else if(key==27){//esc
             while (1){
                     int F=jk[0]-'0';
             if(F==1){
+                clean();
                 main(_argc , _argv); break;
             }
             else if (F==0){
@@ -123,7 +123,6 @@ PP=REDO.top();
 UNDO.push(PP);
 CONNECT(PP.x1,PP.y1,PP.x2,PP.y2,PP.PLR);
 REDO.pop();
-//sdl_page();
 }
 else if(key==32){//hit space
 Toggle=!Toggle;//if(Toggle==1){Toggle=0;}else{Toggle=1;}
@@ -301,9 +300,9 @@ LT=SDL_GetTicks();
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
 int main(int argc, char* argv[]) {
-    int a=0;
+int a=0;
 p1.color=0;//player one blue
-p2.color=1;//player2 green
+p2.color=1;//player two green
 system("cls");
 printf(YELLOW"\n\n  *****************************************************************************************************************\n"RESET);
   printf(YELLOW"    ______   _______  _______  ______    _______  _______  ______     ______   _______  _     _  _______   ______ \n"RESET);
@@ -362,7 +361,7 @@ char SARA[2];
         int O = SARA[0]-'0';
     if(O == 1){
     TOP10=0;
-    //a=1;
+    clean();
     main(_argc , _argv);
     break;}
     else if ( O == 0){
@@ -562,6 +561,7 @@ system("cls");
 view();
 last=clock();
 sdl_page();
+
 }
 }
 

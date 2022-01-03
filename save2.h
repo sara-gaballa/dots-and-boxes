@@ -19,6 +19,7 @@ fprintf(save2,"%d\n",timenew);
 fprintf(save2,"%d\n",N);
 fprintf(save2,"%d\n",player1);
 fprintf(save2,"%d\n",player2);
+fprintf(save2,"%d\n",p1.color);
 fclose(save2);
 FILE *broadsave2;
 broadsave2 = fopen("broadsave2.txt","w");
@@ -48,6 +49,7 @@ fscanf(save2,"%d%d%d%d%d%d",&play1.score,&play2.score,&play1.moves,&play2.moves,
 fscanf(save2,"%d",&N);
 fscanf(save2,"%d",&player1);
 fscanf(save2,"%d",&player2);
+fscanf(save2,"%d",&p1.color);
 fclose(save2);
 FILE *broadsave2;
 broadsave2 = fopen("broadsave2.txt","r");

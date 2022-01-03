@@ -9,6 +9,8 @@
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
 #include"TOP10.h"
+#include"logic.h"
+void clean(void);
 void view(){
 printf(YELLOW"____________________________________\n|"RESET);
 printf(BLUE"\nPLAYER 1:  "RESET);
@@ -81,7 +83,7 @@ if(num_of_lines==0 && (play1.score+play2.score==(N-1)*(N-1))){
         int O = SARA[0]-'0';
     if(O == 1){
      play=0;
-     SDL_Quit();
+     clean();
     main(_argc , _argv);
     break;}
     else if ( O == 0){

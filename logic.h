@@ -48,4 +48,25 @@ GRID[i][l]=p;
 
 return flag;
 }
+void clean(){
+p1.x=0;
+p1.y=0;
+p2.x=0;
+p2.y=0;
+Toggle=0;
+play1.score=0;
+play2.score=0;
+play1.moves=0;
+play2.moves=0;
+for(int i=0;i<10;i++){
+for(int l=0;l<10;l++)
+for(int x=0;x<10;x++)
+for(int z=0;z<10;z++)
+adj[i][l][x][z]=adj[x][z][i][l]=0;
+}
+for(int i=0;i<9;i++){
+for(int l=0;l<9;l++)
+GRID[i][l]=0;
+}
+}
 #endif // LOGIC_H_INCLUDED
