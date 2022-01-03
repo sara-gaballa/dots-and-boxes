@@ -15,11 +15,11 @@
 void sdl_page(void);
 bool changed;
 int S=0,LO=0;//for loading and saving
-int s1,s2,s3,s4;
-int last;
+int s1=0,s2=0,s3=0,s4=0;
+int last=0;
 SDL_Event event;
 const int GRAPHICS=6;//Aliasing
-bool Toggle;
+bool Toggle=0;
 void TOGGLE(int key){
 if(key==1073741904){//L
 p1.x--;
@@ -37,20 +37,74 @@ else if(key==27){//esc
         SDL_Quit();
         printf(CYAN"\nchoose [1]save1 , [2]save2 , [3]save3"RESET);
         char out[2];
+        char jk[2];
         scanf("%s",&out);
         while(1){
                  S=out[0]-'0';
         if(S==1){
             save1();
+            loadgame=0;
+            printf("\nENTER 1 to return: ");
+            printf("\nENTER 0 to exit: ");
+            scanf("%s",&jk);
+            while (1){
+                    int F=jk[0]-'0';
+            if(F==1){
+                main(_argc , _argv); break;
+            }
+            else if (F==0){
             system("taskkill/IM cb_console_runner.exe");
+            exit(0);}
+            else {
+                printf("ERROE");
+                scanf("%s",&jk);
+            }
+
+        }break;
         }
          else if(S==2){
             save2();
+            loadgame=0;
+            printf("\nENTER 1 to return: ");
+            printf("\nENTER 0 to exit: ");
+
+            scanf("%s",&jk);
+            while (1){
+                    int F=jk[0]-'0';
+            if(F==1){
+                main(_argc , _argv); break;
+            }
+            else if (F==0){
             system("taskkill/IM cb_console_runner.exe");
+            exit(0);}
+            else {
+                printf("ERROE");
+                scanf("%s",&jk);
+            }
+
+        }break;
         }
          else if(S==3){
             save3();
+            loadgame=0;
+            printf("\nENTER 1 to return: ");
+            printf("\nENTER 0 to exit: ");
+
+            scanf("%s",&jk);
+            while (1){
+                    int F=jk[0]-'0';
+            if(F==1){
+                main(_argc , _argv); break;
+            }
+            else if (F==0){
             system("taskkill/IM cb_console_runner.exe");
+            exit(0);}
+            else {
+                printf("ERROE");
+                scanf("%s",&jk);
+            }
+
+        }break;
         }
         else printf(RED"ERROE"RESET); scanf("%s",&out);
         }
@@ -210,14 +264,17 @@ if(event.type==SDL_QUIT){
                  S=out[0]-'0';
         if(S==1){
             save1();
+            loadgame=0;
             exit(0);
         }
          else if(S==2){
             save2();
+            loadgame=0;
             exit(0);
         }
          else if(S==3){
             save3();
+            loadgame=0;
             exit(0);
         }
         else printf(RED"ERROE"RESET); scanf("%s",&out);
@@ -328,16 +385,19 @@ while(loadgame==1){
     if(LO==1){
             system("cls");
             save1();
+            loadgame=0;
             break;
     }
     else if(LO==2){
             system("cls");
             save2();
+            loadgame=0;
             break;
     }
     else if(LO==3){
             system("cls");
             save3();
+            loadgame=0;
             break;
     }
     else {
@@ -502,7 +562,6 @@ system("cls");
 view();
 last=clock();
 sdl_page();
-
 }
 }
 
