@@ -41,11 +41,15 @@ printf(GREEN"\n\nMOVES :  %d"RESET,play2.moves);
 printf(YELLOW"\n|\n____________________________________\n"RESET);
 printf(MAGENTA"NUM OF LINES LEFT =   %d"RESET,num_of_lines );
 }
-printf(RED"\nTIME = %d\n"RESET,timenew);
-if(loadgame==0){
-printf(CYAN"for undo press=X\nfor exit the game press esc"RESET);
+if(timenew>60){
+t.mins=timenew/60;
+t.seconds=timenew-t.mins*60;}
+else{t.seconds=timenew;}
+printf(RED"\nTIME = %d : %d \n"RESET,t.mins,t.seconds);
 printf(RED"\nINSTUCTIONS:\n"RESET);
-printf(CYAN"TO MOVE:\npress any of the 4 arrow keys to move along the dots \nTO DRAW:\n press space with arrows"RESET);
+printf(CYAN"TO MOVE:\npress any of the 4 arrow keys to move along the dots \nTO DRAW:\npress space to select the dot"RESET);
+if(loadgame==0 && player2==1){
+printf(CYAN"\nfor undo press:u\nfor redo press:r\nfor exit the game press esc"RESET);
 }
 if(num_of_lines==0){
     if(play1.score>play2.score){

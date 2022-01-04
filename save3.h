@@ -39,8 +39,28 @@ FILE *save3;
 save3=fopen("save3.txt","r");
 if(save3 == NULL){
     printf(RED"\n\n\n\t\t\t\tERROR SAVE A GAME FIRST"RESET);
+     printf("\n\n\n\t\t\t\tpress 1 to return\n ");
+    printf("\t\t\t\tpress 0 to exit");
+    char E[2];
+    int NANCY;
+    scanf("%s",&E);
+    while(1){
+        NANCY=E[0]-'0';
+        if(NANCY==1){
+                 loadgame=0;
+            main(_argc , _argv);
+            break;
+        }
+        else if (NANCY==0){
+            system("taskkill/IM cb_console_runner.exe");
+            exit(0);
+        }
+        else {
+            printf("ERROR");
+            scanf("%s",&E);
+        }
+    }
 
-    exit(0);
 }
 fgets(play1.name,50,save3);
 fgets(play2.name,50,save3);

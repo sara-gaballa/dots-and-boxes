@@ -6,6 +6,10 @@ int play=0 , loadgame=0 , TOP10=0 , Exit=0 ,  player1 ,player2  ,easy=0, hard=0 
 bool Toggle=0;
 char compt[50];
 int timenew=0;
+struct timec{
+int seconds=0;
+int mins=0;
+}t;
 int WIDTH,HEIGHT,LT,N;
 int num_of_lines=0;
 struct scoresANDname{
