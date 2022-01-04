@@ -1,5 +1,7 @@
 #ifndef STRUCTS_H_INCLUDED
 #define STRUCTS_H_INCLUDED
+bool adj[10][10][10][10];
+int GRID[10][10];
 int play=0 , loadgame=0 , TOP10=0 , Exit=0 ,  player1 ,player2  ,easy=0, hard=0 , b , f ,g;
 bool Toggle=0;
 char compt[50];

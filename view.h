@@ -10,6 +10,7 @@
 #define RESET   "\x1b[0m"
 #include"TOP10.h"
 #include"logic.h"
+#include"debug_final_save.h"
 void clean(void);
 void view(){
 printf(YELLOW"____________________________________\n|"RESET);
@@ -74,6 +75,7 @@ if(num_of_lines==0){
 
 }
 if(num_of_lines==0 && (play1.score+play2.score==(N-1)*(N-1))){
+    final_save();
     top();
     char SARA[2];
     printf(RED"\npress 1 to return "RESET);

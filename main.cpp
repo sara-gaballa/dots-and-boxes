@@ -12,6 +12,7 @@
 #include"save2.h"
 #include"save3.h"
 #include"TOP10.h"
+#include"debug_final_save.h"
 bool changed;
 int S=0,LO=0;//for loading and saving
 int last=0;
