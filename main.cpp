@@ -110,19 +110,22 @@ else if(key==27){//esc
         }
 
 }
-else if(key==117){//u ==undo
+else if(key==117 && UNDO.SIZE>0 && player2==1){//u ==undo
 PP=UNDO.top();
+if(p1.color!=PP.PLR){
+swap(p1,p2);}//player now is not the same as the past player
 DISCONNECT(PP.x1,PP.y1,PP.x2,PP.y2,PP.PLR);
-//if(p1.color!=PP.PLR){
-//swap(p1,p2);}
 REDO.push(PP);
 UNDO.pop();
+UPDGRID(p1.color);
 }
-else if(key== 114){//r == redo
+else if(key== 114 && REDO.SIZE>0 && player2==1){//r == redo
 PP=REDO.top();
-UNDO.push(PP);
-CONNECT(PP.x1,PP.y1,PP.x2,PP.y2,PP.PLR);
+if(p1.color!=PP.PLR){//player now is not the same as the future player
+swap(p1,p2);}
+CONNECT(PP.x1,PP.y1,PP.x2,PP.y2,PP.PLR,1);
 REDO.pop();
+UPDGRID(p1.color+1);
 }
 else if(key==32){//hit space
 Toggle=!Toggle;//if(Toggle==1){Toggle=0;}else{Toggle=1;}
@@ -191,7 +194,7 @@ SDL_RenderClear(renderer);
 changed=0;
 if((p1.ox!=p1.x||p1.oy!=p1.y)&&Toggle){
 if(!adj[p1.ox][p1.oy][p1.x][p1.y]&&(abs(p1.ox-p1.x)+abs(p1.oy-p1.y))==1){//Checks if movement adjacent
-CONNECT(p1.ox,p1.oy,p1.x,p1.y);
+CONNECT(p1.ox,p1.oy,p1.x,p1.y,p1.color);
 if(!UPDGRID(p1.color+1)){
 changed=1;
 }

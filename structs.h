@@ -44,7 +44,7 @@ if(SIZE)
 SIZE--;
 }
 point top(){
-return arr[SIZE];
+return arr[SIZE-1];
 }
 void clear(){
 SIZE=0;
