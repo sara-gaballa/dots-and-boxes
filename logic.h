@@ -6,15 +6,16 @@
 void CONNECT(int x1,int y1,int x2,int y2,int pl,bool fromRedo=0){
 adj[x1][y1][x2][y2]=adj[x2][y2][x1][y1]=1;
 num_of_lines--;
-if(p1.color==0){
+PP.PLR=pl;
+if(PP.PLR==0){
     play1.moves++;
 }
-else if(p1.color==1){
+else if(PP.PLR==1){
     play2.moves++;
 }
 system("cls");
 view();
-PP.x1=x1,PP.x2=x2,PP.y1=y1,PP.y2=y2,PP.PLR=pl;
+PP.x1=x1,PP.x2=x2,PP.y1=y1,PP.y2=y2;
 UNDO.push(PP);
 if(fromRedo==0){
 REDO.clear();}
@@ -22,10 +23,10 @@ REDO.clear();}
 void DISCONNECT(int x1,int y1,int x2,int y2,int pl){
 num_of_lines++;    //undo
 adj[x1][y1][x2][y2]=adj[x2][y2][x1][y1]=0;
-if(p1.color==0){
+if(PP.PLR==0){
     play1.moves--;
 }
-else if(p1.color==1){
+else if(PP.PLR==1){
     play2.moves--;
 }
 system("cls");
@@ -40,20 +41,20 @@ for(int l=0;l<9;l++){
 if(adj[i][l][i][l+1]==1&&adj[i][l][i+1][l]==1&&adj[i+1][l][i+1][l+1]==1&&adj[i][l+1][i+1][l+1]==1){
 if(GRID[i][l]==0){
 flag++;
-GRID[i][l]=p;
+GRID[i][l]=p;//if p==1 player 1 / if p==2 player 2
 }
 if (GRID[i][l]==1){
     play1.score++;
 
 }
-else{
+else if (GRID[i][l]==2){
     play2.score++;
 }
 
 }
-else if (GRID[i][l]!=0){
-    GRID[i][l]=0;
-}
+else if (GRID[i][l]!=0){//undo
+         GRID[i][l]=0;
+         }
 }
 }
 system("cls");

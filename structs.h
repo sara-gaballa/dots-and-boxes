@@ -34,22 +34,22 @@ int x1,y1,x2,y2;
 }comp;
 
 
-struct point{
+struct point{//SAVING THE CORRDINATIES AND THE PLAYER
 int x1,y1,x2,y2;
-bool PLR=0;
+bool PLR=0;//PLAYER
 }PP;
 struct{
-point arr[301];
+point arr[301];//array of point struct
 int SIZE=0;
-void push(point X){
+void push(point X){//passing the last corrdinates to push function
 arr[SIZE].x1=X.x1,arr[SIZE].x2=X.x2,arr[SIZE].y1=X.y1,arr[SIZE].y2=X.y2,arr[SIZE].PLR=X.PLR;
 SIZE++;
 }
-void pop(){
+void pop(){//removing the last one
 if(SIZE)
 SIZE--;
 }
-point top(){
+point top(){//passing the last parameters
 return arr[SIZE-1];
 }
 void clear(){

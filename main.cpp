@@ -112,21 +112,22 @@ else if(key==27){//esc
 
 }
 else if(key==117 && UNDO.SIZE>0 && player2==1){//u ==undo
-PP=UNDO.top();
+PP=UNDO.top();//last move(corr)
 if(p1.color!=PP.PLR){
 swap(p1,p2);}//player now is not the same as the past player
-DISCONNECT(PP.x1,PP.y1,PP.x2,PP.y2,PP.PLR);
-REDO.push(PP);
-UNDO.pop();
-UPDGRID(p1.color);
+DISCONNECT(PP.x1,PP.y1,PP.x2,PP.y2,PP.PLR);//remove the line
+REDO.push(PP);//save this point in case of redo
+UNDO.pop();//remove it by size of stack--
+UPDGRID(p1.color);//
 }
 else if(key== 114 && REDO.SIZE>0 && player2==1){//r == redo
 PP=REDO.top();
-if(p1.color!=PP.PLR){//player now is not the same as the future player
+if(p1.color==PP.PLR && !UPDGRID(PP.PLR+1)){
 swap(p1,p2);}
-CONNECT(PP.x1,PP.y1,PP.x2,PP.y2,PP.PLR,1);
-REDO.pop();
-UPDGRID(p1.color+1);
+CONNECT(PP.x1,PP.y1,PP.x2,PP.y2,PP.PLR,1);//line draw
+REDO.pop();//remove the saved one
+if(UPDGRID(PP.PLR+1) && p1.color!=PP.PLR){
+ swap(p1,p2);}
 }
 else if(key==32){//hit space
 Toggle=!Toggle;//if(Toggle==1){Toggle=0;}else{Toggle=1;}
