@@ -5,10 +5,7 @@
 using namespace std;
 void DrawCircle(SDL_Renderer * renderer,int centreX,int centreY,int radius,int radius2,int ALIAS=1,int R=255,int G=255,int B=255)
 {
-vector<vector<bool>>MAT(radius*ALIAS*2+ALIAS+1);
-vector<pair<int,int>>BB[256];
-for(int i=0;i<=radius*ALIAS*2+ALIAS;i++)
-MAT[i].resize(radius*ALIAS*2+ALIAS+1);
+bool MAT[radius*ALIAS*2+ALIAS+1][radius*ALIAS*2+ALIAS+1];
 radius2=radius-radius2;
 for(int i=-radius*ALIAS;i<=radius*ALIAS;i++){
 for(int l=-radius*ALIAS;l<=radius*ALIAS;l++){
@@ -27,19 +24,11 @@ for(int x=0;x<ALIAS;x++)
 for(int z=0;z<ALIAS;z++)
 TOT+=MAT[i+x+radius*ALIAS][l+z+radius*ALIAS]*255;
 TOT/=ALIAS*ALIAS;
-pair<int,int>AA;
-AA.first=centreX+i/ALIAS+ALIAS/2,AA.second=centreY+l/ALIAS+ALIAS/2;
-BB[TOT].push_back(AA);
+SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
+SDL_SetRenderDrawColor(renderer,R,G,B,TOT);
+
+SDL_RenderDrawPoint(renderer,centreX+i/ALIAS+ALIAS/2,centreY+l/ALIAS+ALIAS/2);
 }
-}
-for(int i=1;i<=255;i++){
-if(!BB[i].size())continue;
-SDL_SetRenderDrawColor(renderer,R,G,B,i);
-SDL_Point *PO=(SDL_Point*)malloc(BB[i].size()*sizeof(SDL_Point));
-for(int l=0;l<BB[i].size();l++)
-PO[l].x=BB[i][l].first,PO[l].y=BB[i][l].second;
-SDL_RenderDrawPoints(renderer,PO,BB[i].size());
-free(PO);
 }
 }
 void DRAWLINE(SDL_Renderer *Renderer,int x1,int y1,int x2,int y2,int W){
