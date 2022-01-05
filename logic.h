@@ -63,6 +63,8 @@ return flag;//the result of the function
 }
 void clean(){//remove all data for returning to main and play again
 timenew=0;
+player1=0;
+player2=0;
 p1.x=0;
 p1.y=0;
 p2.x=0;

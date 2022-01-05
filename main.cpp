@@ -135,9 +135,6 @@ Toggle=!Toggle;//if(Toggle==1){Toggle=0;}else{Toggle=1;}
 p1.x+=N,p1.x%=N;  //limits
 p1.y+=N,p1.y%=N;  //limits
 }
-/*void ADD(SDL_Renderer *renderer,int x,int y,int R,int G,int B){
-DrawCircle(renderer,cor[x][y].x,cor[x][y].y,13,13,GRAPHICS,R,G,B);
-}*/
 
 void DRAW(SDL_Renderer *renderer,int x,int y,int r,int g,int b){// draw colored square and toggle circle and
 for(int i=0;i<N-1;i++){
@@ -307,12 +304,18 @@ p1.color=0;//player one blue
 p2.color=1;//player two green
 system("cls");
 printf(YELLOW"\n\n  *****************************************************************************************************************\n"RESET);
-  printf(YELLOW"    ______   _______  _______  ______    _______  _______  ______     ______   _______  _     _  _______   ______ \n"RESET);
-    printf(GREEN"   (______) (_______)(_______)/ _____)  (_______)(_______)(______)   (____  \\ (_______)(_)   (_)(_______) / _____) \n"RESET);
-    printf(BLUE"    _     _  _     _     _   ( (____     _______  _     _  _     _    ____)  ) _     _    ___    _____   ( (____ \n"RESET);
-    printf(CYAN"   | |   | || |   | |   | |   \\____ \\   |  ___  || |   | || |   | |  |  __  ( | |   | |  |   |  |  ___)   \\____ \\\n"RESET);
-    printf(MAGENTA"   | |__/ / | |___| |   | |   _____) )  | |   | || |   | || |__/ /   | |__)  )| |___| | / / \\ \\ | |_____  _____) ) \n"RESET);
-    printf(RED"   |_____/   \\_____/    |_|  (______/   |_|   |_||_|   |_||_____/    |______/  \\_____/ |_|   |_||_______)(______/ \n"RESET);
+printf( GREEN R"(_______   ______   .___________.    _______.        ___      .__   __.  _______     .______     ______   ___   ___  _______     _______.)" RESET);
+printf("\n");
+printf( BLUE R"(|       \ /  __  \  |           |   /       |       /   \     |  \ |  | |       \    |   _  \   /  __  \  \  \ /  / |   ____|   /       |)"RESET);
+printf("\n");
+printf( MAGENTA R"(|  .--.  |  |  |  | `---|  |----`  |   (----`      /  ^  \    |   \|  | |  .--.  |   |  |_)  | |  |  |  |  \  V  /  |  |__     |   (----`)"RESET);
+printf("\n");
+printf( RED R"(|  |  |  |  |  |  |     |  |        \   \         /  /_\  \   |  . `  | |  |  |  |   |   _  <  |  |  |  |   >   <   |   __|     \   \ )"RESET);
+printf("\n");
+printf( CYAN R"(|  '--'  |  `--'  |     |  |    .----)   |       /  _____  \  |  |\   | |  '--'  |   |  |_)  | |  `--'  |  /  .  \  |  |____.----)   | )"RESET);
+printf("\n");
+printf( GREEN  R"(|_______/ \______/      |__|    |_______/       /__/     \__\ |__| \__| |_______/    |______/   \______/  /__/ \__\ |_______|_______/    )"RESET);
+
     printf(YELLOW"\n  *****************************************************************************************************************\n"RESET);
 printf("\n\n\n\n");
 printf( BLUE "\t \t \t [1] PLAY\n\n" RESET); printf(RED "\t \t \t [2] LOAD GAME\n\n"RESET);
@@ -566,7 +569,6 @@ sdl_page();
 
 }
 }
-
 }
 
 
