@@ -303,29 +303,32 @@ int a=0;
 p1.color=0;//player one blue
 p2.color=1;//player two green
 system("cls");
-printf(YELLOW"\n\n  *****************************************************************************************************************\n"RESET);
-printf( GREEN R"(_______   ______   .___________.    _______.        ___      .__   __.  _______     .______     ______   ___   ___  _______     _______.)" RESET);
+printf(CYAN"\n\n  *****************************************************************************************************************\n"RESET);
+printf("\t\t\t");
+printf( MAGENTA R"(      _       _                         _   _                        )" RESET);
 printf("\n");
-printf( BLUE R"(|       \ /  __  \  |           |   /       |       /   \     |  \ |  | |       \    |   _  \   /  __  \  \  \ /  / |   ____|   /       |)"RESET);
+printf("\t\t\t");
+printf( CYAN R"(   __| | ___ | |_ ___    __ _ _ __   __| | | |__   _____  _____  ___ )"RESET);
 printf("\n");
-printf( MAGENTA R"(|  .--.  |  |  |  | `---|  |----`  |   (----`      /  ^  \    |   \|  | |  .--.  |   |  |_)  | |  |  |  |  \  V  /  |  |__     |   (----`)"RESET);
+printf("\t\t\t");
+printf( MAGENTA R"(  / _` |/ _ \| __/ __|  / _` | '_ \ / _` | | '_ \ / _ \ \/ / _ \/ __|)"RESET);
 printf("\n");
-printf( RED R"(|  |  |  |  |  |  |     |  |        \   \         /  /_\  \   |  . `  | |  |  |  |   |   _  <  |  |  |  |   >   <   |   __|     \   \ )"RESET);
+printf("\t\t\t");
+printf( BLUE R"( | (_| | (_) | |_\__ \ | (_| | | | | (_| | | |_) | (_) >  <  __/\__ \)"RESET);
 printf("\n");
-printf( CYAN R"(|  '--'  |  `--'  |     |  |    .----)   |       /  _____  \  |  |\   | |  '--'  |   |  |_)  | |  `--'  |  /  .  \  |  |____.----)   | )"RESET);
-printf("\n");
-printf( GREEN  R"(|_______/ \______/      |__|    |_______/       /__/     \__\ |__| \__| |_______/    |______/   \______/  /__/ \__\ |_______|_______/    )"RESET);
+printf("\t\t\t");
+printf( CYAN R"(  \__,_|\___/ \__|___/  \__,_|_| |_|\__,_| |_.__/ \___/_/\_\___||___/)"RESET);
 
-    printf(YELLOW"\n  *****************************************************************************************************************\n"RESET);
+    printf(CYAN"\n\n  *****************************************************************************************************************\n"RESET);
 printf("\n\n\n\n");
-printf( BLUE "\t \t \t [1] PLAY\n\n" RESET); printf(RED "\t \t \t [2] LOAD GAME\n\n"RESET);
+printf(  MAGENTA "\t \t \t [1] PLAY\n\n" RESET); printf(CYAN "\t \t \t [2] LOAD GAME\n\n"RESET);
 printf(MAGENTA "\t \t \t [3] TOP TEN\n\n"RESET);
-printf(GREEN "\t \t \t [4] EXIT\n\n"RESET);
+printf(BLUE "\t \t \t [4] EXIT\n\n"RESET);
 printf("\n");
 
 
 char input[2]={} ,num[2]={} ,hardness[2]={} ,dim[2]={} ;
-printf(GREEN "ENTER 1 or 2 or 3 or 4:  " RESET);
+printf(CYAN "ENTER 1 or 2 or 3 or 4:  " RESET);
 
 scanf("%s",&input);
 while(1){
