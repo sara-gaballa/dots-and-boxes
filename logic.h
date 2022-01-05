@@ -16,7 +16,7 @@ else if(PP.PLR==1){
 system("cls");
 view();
 PP.x1=x1,PP.x2=x2,PP.y1=y1,PP.y2=y2;
-UNDO.push(PP);
+UNDO.push(PP);//save each move in stack
 if(fromRedo==0){
 REDO.clear();}
 }
@@ -52,16 +52,16 @@ else if (GRID[i][l]==2){
 }
 
 }
-else if (GRID[i][l]!=0){//undo
+else if (GRID[i][l]!=0){//when UPGRID is called in undo it remove the colored square
          GRID[i][l]=0;
          }
 }
 }
 system("cls");
 view();
-return flag;
+return flag;//the result of the function
 }
-void clean(){
+void clean(){//remove all data for returning to main and play again
 timenew=0;
 p1.x=0;
 p1.y=0;

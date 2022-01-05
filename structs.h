@@ -52,7 +52,7 @@ SIZE--;
 point top(){//passing the last parameters
 return arr[SIZE-1];
 }
-void clear(){
+void clear(){//to remove all redo stack data when the player play any move after undo
 SIZE=0;
 }
 }UNDO,REDO;

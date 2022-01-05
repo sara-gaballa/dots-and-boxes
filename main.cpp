@@ -118,16 +118,16 @@ swap(p1,p2);}//player now is not the same as the past player
 DISCONNECT(PP.x1,PP.y1,PP.x2,PP.y2,PP.PLR);//remove the line
 REDO.push(PP);//save this point in case of redo
 UNDO.pop();//remove it by size of stack--
-UPDGRID(p1.color);//
+UPDGRID(p1.color);//to remove the colored square
 }
 else if(key== 114 && REDO.SIZE>0 && player2==1){//r == redo
 PP=REDO.top();
-if(p1.color==PP.PLR && !UPDGRID(PP.PLR+1)){
+if(p1.color==PP.PLR && !UPDGRID(PP.PLR+1)){//color is the same and no square is about to be made before connect
 swap(p1,p2);}
 CONNECT(PP.x1,PP.y1,PP.x2,PP.y2,PP.PLR,1);//line draw
 REDO.pop();//remove the saved one
-if(UPDGRID(PP.PLR+1) && p1.color!=PP.PLR){
- swap(p1,p2);}
+if(UPDGRID(PP.PLR+1) && p1.color!=PP.PLR){//after connect there if there is a square made by this color swap it
+swap(p1,p2);}
 }
 else if(key==32){//hit space
 Toggle=!Toggle;//if(Toggle==1){Toggle=0;}else{Toggle=1;}
@@ -135,23 +135,23 @@ Toggle=!Toggle;//if(Toggle==1){Toggle=0;}else{Toggle=1;}
 p1.x+=N,p1.x%=N;  //limits
 p1.y+=N,p1.y%=N;  //limits
 }
-void ADD(SDL_Renderer *renderer,int x,int y,int R,int G,int B){   //el fun mesh bt3ml haga
+/*void ADD(SDL_Renderer *renderer,int x,int y,int R,int G,int B){
 DrawCircle(renderer,cor[x][y].x,cor[x][y].y,13,13,GRAPHICS,R,G,B);
-}
+}*/
 
-void DRAW(SDL_Renderer *renderer,int x,int y,int r,int g,int b){
+void DRAW(SDL_Renderer *renderer,int x,int y,int r,int g,int b){// draw colored square and toggle circle and
 for(int i=0;i<N-1;i++){
 for(int l=0;l<N-1;l++){
 if(GRID[i][l]==1){
 SDL_SetRenderDrawColor(renderer,0, 0, 255, 255); //blue
 }
 else if(GRID[i][l]==2){
-SDL_SetRenderDrawColor(renderer,0, 255, 0,255); //green1
+SDL_SetRenderDrawColor(renderer,0, 255, 0,255); //green
 }
 if(GRID[i][l]!=0){
 SDL_Rect A;
-A.x=cor[i][l].x,A.y=cor[i][l].y;
-A.h=cor[i+1][l].x-cor[i][l].x,A.w=cor[i][l+1].y-cor[i][l].y;
+A.x=cor[i][l].x,A.y=cor[i][l].y;//corrdinates of square
+A.h=cor[i+1][l].x-cor[i][l].x,A.w=cor[i][l+1].y-cor[i][l].y;// height and width
 SDL_RenderFillRect(renderer,&A);
 }
 }
@@ -169,7 +169,7 @@ DrawCircle(renderer,cor[i][l].x,cor[i][l].y,13,13,GRAPHICS,r,g,b); //blue or gre
 }
 }
 }
-int converter(){
+int converter(){//press toggle
 compplay();
 p1.x=comp.x1;
 p1.y=comp.y1;
@@ -188,7 +188,6 @@ if(comp.y2>comp.y1){
     return 1073741905;//down
 }
 }
-
 void upd(SDL_Renderer *renderer){
 timenew=(clock()-last)/1000;//time
 SDL_SetRenderDrawColor(renderer,10,10,10,255); //black background
@@ -243,7 +242,7 @@ SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
 SDL_SetRenderDrawColor(renderer,30,10,30,255);
 SDL_RenderClear(renderer);
 LT=SDL_GetTicks();
-for(int i=0;i<N;i++){
+for(int i=0;i<N;i++){// draw circles loop
 for(int l=0;l<N;l++){
 cor[i][l].x=i*100+20;
 cor[i][l].y=l*100+80;
@@ -290,11 +289,9 @@ TOGGLE(event.key.keysym.sym);
 }
 }
 }
-//if(SDL_GetTicks()-LT>=1000/60.0){
 upd(renderer);
 SDL_RenderPresent(renderer);
 LT=SDL_GetTicks();
-
 }
 }
 #define RED     "\x1b[31m"
