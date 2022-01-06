@@ -55,7 +55,7 @@ else if(key==27){//esc
             system("taskkill/IM cb_console_runner.exe");
             exit(0);}
             else {
-                printf("ERROE");
+                printf("Erorr");
                 scanf("%s",&jk);
             }
 
@@ -78,7 +78,7 @@ else if(key==27){//esc
             system("taskkill/IM cb_console_runner.exe");
             exit(0);}
             else {
-                printf("ERROE");
+                printf("Erorr");
                 scanf("%s",&jk);
             }
 
@@ -101,13 +101,13 @@ else if(key==27){//esc
             system("taskkill/IM cb_console_runner.exe");
             exit(0);}
             else {
-                printf("ERROE");
+                printf("Erorr");
                 scanf("%s",&jk);
             }
 
         }break;
         }
-        else printf(RED"ERROE"RESET); scanf("%s",&out);
+        else printf(RED"Erorr"RESET); scanf("%s",&out);
         }
 
 }
@@ -247,7 +247,7 @@ cor[i][l].y=l*100+80;
 }
 SDL_RenderPresent(renderer);
 //LT=SDL_GetTicks();
-while(1){
+while(1){// gui main game loop
 if(p1.color==1 && player1==1){
     Toggle=1;
     TOGGLE(converter());
@@ -280,7 +280,7 @@ if(event.type==SDL_QUIT){
             system("taskkill/IM cb_console_runner.exe");
             exit(0);}
             else {
-                printf("ERROE");
+                printf("Erorr");
                 scanf("%s",&jk);
             }
 
@@ -305,7 +305,7 @@ if(event.type==SDL_QUIT){
             system("taskkill/IM cb_console_runner.exe");
             exit(0);}
             else {
-                printf("ERROE");
+                printf("Erorr");
                 scanf("%s",&jk);
             }
 
@@ -330,17 +330,17 @@ if(event.type==SDL_QUIT){
             system("taskkill/IM cb_console_runner.exe");
             exit(0);}
             else {
-                printf("ERROE");
+                printf("Erorr");
                 scanf("%s",&jk);
             }
 
         }
         }
-        else printf(RED"ERROE"RESET); scanf("%s",&out);
+        else printf(RED"Erorr"RESET); scanf("%s",&out);
         }
 }
 
-else if(event.type==SDL_KEYDOWN){
+else if(event.type==SDL_KEYDOWN){// activate the keyboard keys
 TOGGLE(event.key.keysym.sym);
 }
 }
