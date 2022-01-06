@@ -577,7 +577,7 @@ else {
 }
 }
 if(easy==1){
-      printf("\n enter the dim (3 or 4) : ");
+      printf(GREEN"\n enter the dim (3 or 4) : "RESET);
       scanf("%s",&dim[0]);
 while (1){
        g = dim[0]-'0';
@@ -595,7 +595,7 @@ scanf("%s",&dim[0]);
 }}}
 
 if(hard==1){
-      printf("\n enter the dim (5 or 6 or 7) : ");
+      printf(RED"\n enter the dim (5 or 6 or 7) : "RESET);
       scanf("%s",&dim[0]);
     while(1){
           g = dim[0]-'0';
