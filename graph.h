@@ -26,7 +26,6 @@ TOT+=MAT[i+x+radius*ALIAS][l+z+radius*ALIAS]*255;
 TOT/=ALIAS*ALIAS;
 SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
 SDL_SetRenderDrawColor(renderer,R,G,B,TOT);
-
 SDL_RenderDrawPoint(renderer,centreX+i/ALIAS+ALIAS/2,centreY+l/ALIAS+ALIAS/2);
 }
 }

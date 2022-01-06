@@ -62,6 +62,8 @@ view();
 return flag;//the result of the function
 }
 void clean(){//remove all data for returning to main and play again
+easy=0;
+hard=0;
 timenew=0;
 player1=0;
 player2=0;

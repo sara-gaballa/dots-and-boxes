@@ -14,7 +14,7 @@ if(play1.score>play2.score){
         break;}
         }
 fprintf(top10,topn[i].name);
-fprintf(top10,"\n%d\n",topn[i].score);
+fprintf(top10,"%d\n",topn[i].score);
 fclose(top10);
 }
 if(play1.score<play2.score && strcmp(compt,play2.name)!=0){

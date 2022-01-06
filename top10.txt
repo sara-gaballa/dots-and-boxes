@@ -1,21 +1,6 @@
-nancy
+NANCY
 
-36
-sara
+9
+SARA
 
-5
-dg
-
-6
-sarsor
-5
-nancy
-
-36
-
-sara
-
-6
-nancy
-
-36
+4

@@ -159,7 +159,7 @@ if(i==x&&l==y&&Toggle){
 DrawCircle(renderer,cor[i][l].x,cor[i][l].y,15,3,GRAPHICS,255,0,0); //red circle if toggle in on
 }
 else
-DrawCircle(renderer,cor[i][l].x,cor[i][l].y,15,3,GRAPHICS);
+DrawCircle(renderer,cor[i][l].x,cor[i][l].y,15,3,GRAPHICS);//draw the loop of circles
 if(i==x&&l==y){
 DrawCircle(renderer,cor[i][l].x,cor[i][l].y,13,13,GRAPHICS,r,g,b); //blue or green circle
 }
@@ -192,7 +192,7 @@ SDL_RenderClear(renderer);
 changed=0;
 if((p1.ox!=p1.x||p1.oy!=p1.y)&&Toggle){
 if(!adj[p1.ox][p1.oy][p1.x][p1.y]&&(abs(p1.ox-p1.x)+abs(p1.oy-p1.y))==1){//Checks if movement adjacent
-CONNECT(p1.ox,p1.oy,p1.x,p1.y,p1.color);
+CONNECT(p1.ox,p1.oy,p1.x,p1.y,p1.color);//what connects the two points
 if(!UPDGRID(p1.color+1)){
 changed=1;
 }
@@ -207,10 +207,10 @@ p2.oy=p2.y=p1.y;}
 swap(p1,p2);
 }
 if(p1.color==1){
-DRAW(renderer,p1.x,p1.y,0,255,0);
+DRAW(renderer,p1.x,p1.y,0,255,0);//green circle
 }
 else{
-DRAW(renderer,p1.x,p1.y,0,0,255);
+DRAW(renderer,p1.x,p1.y,0,0,255);// blue circle
 }
 for(int i=0;i<N;i++){
 for(int l=0;l<N;l++){
@@ -238,7 +238,7 @@ SDL_Renderer* renderer= SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
 SDL_SetRenderDrawColor(renderer,30,10,30,255);
 SDL_RenderClear(renderer);
-LT=SDL_GetTicks();
+//LT=SDL_GetTicks();
 for(int i=0;i<N;i++){// draw circles loop
 for(int l=0;l<N;l++){
 cor[i][l].x=i*100+20;
@@ -246,7 +246,7 @@ cor[i][l].y=l*100+80;
 }
 }
 SDL_RenderPresent(renderer);
-LT=SDL_GetTicks();
+//LT=SDL_GetTicks();
 while(1){
 if(p1.color==1 && player1==1){
     Toggle=1;
@@ -254,7 +254,6 @@ if(p1.color==1 && player1==1){
 }
 else{
 while(SDL_PollEvent(&event)){
-//SDL_WaitEvent(&event);
 if(event.type==SDL_QUIT){
         SDL_Quit();
         printf(CYAN"\nchoose [1]save1 , [2]save2 , [3]save3"RESET);
@@ -265,17 +264,77 @@ if(event.type==SDL_QUIT){
         if(S==1){
             save1();
             loadgame=0;
-            exit(0);
+             char jk[2];
+            printf("\nENTER 1 to return: ");
+            printf("\nENTER 0 to exit: ");
+            scanf("%s",&jk);
+            while (1){
+                    int F=jk[0]-'0';
+            if(F==1){
+                clean();
+                hard=0;
+                easy=0;
+                main(_argc , _argv); break;
+            }
+            else if (F==0){
+            system("taskkill/IM cb_console_runner.exe");
+            exit(0);}
+            else {
+                printf("ERROE");
+                scanf("%s",&jk);
+            }
+
+        }
         }
          else if(S==2){
             save2();
             loadgame=0;
-            exit(0);
+             char jk[2];
+            printf("\nENTER 1 to return: ");
+            printf("\nENTER 0 to exit: ");
+            scanf("%s",&jk);
+            while (1){
+                    int F=jk[0]-'0';
+            if(F==1){
+                clean();
+                hard=0;
+                easy=0;
+                main(_argc , _argv); break;
+            }
+            else if (F==0){
+            system("taskkill/IM cb_console_runner.exe");
+            exit(0);}
+            else {
+                printf("ERROE");
+                scanf("%s",&jk);
+            }
+
+        }
         }
          else if(S==3){
             save3();
             loadgame=0;
-            exit(0);
+            char jk[2];
+            printf("\nENTER 1 to return: ");
+            printf("\nENTER 0 to exit: ");
+            scanf("%s",&jk);
+            while (1){
+                    int F=jk[0]-'0';
+            if(F==1){
+                clean();
+                hard=0;
+                easy=0;
+                main(_argc , _argv); break;
+            }
+            else if (F==0){
+            system("taskkill/IM cb_console_runner.exe");
+            exit(0);}
+            else {
+                printf("ERROE");
+                scanf("%s",&jk);
+            }
+
+        }
         }
         else printf(RED"ERROE"RESET); scanf("%s",&out);
         }
@@ -354,16 +413,16 @@ while(1){
 while(TOP10==1){
     top();
     system("cls");
-    printf(GREEN"\n\t\t\t\t\t TOP 10 LIST\n"RESET);
+    printf(BLUE"\n\t\t\t\t\t TOP 10 LIST\n"RESET);
     overwrriten();
     sorting();
     for(int i=0;i<10;i++){
-    printf(RED"[%d]"RESET,i+1);
-    printf(YELLOW"\nNAME: %sSCORE: %d\n"RESET,topn[i].name,topn[i].score);
+    printf(YELLOW"[%d]"RESET,i+1);
+    printf(CYAN"\nNAME: %sSCORE: %d\n"RESET,topn[i].name,topn[i].score);
     }
 char SARA[2];
-    printf("\npress 1 to return ");
-    printf("\npress 0 to exit ");
+    printf(RED"\npress 1 to return "RESET);
+    printf(RED"\npress 0 to exit "RESET);
     scanf("%s",&SARA);
     while(1){
         int O = SARA[0]-'0';
@@ -517,7 +576,7 @@ else {
     scanf("%s",&hardness[0]);
 }
 }
-if(easy==1 ||loadgame==1){
+if(easy==1){
       printf("\n enter the dim (3 or 4) : ");
       scanf("%s",&dim[0]);
 while (1){
@@ -535,7 +594,7 @@ printf(RED"ERROR"RESET);
 scanf("%s",&dim[0]);
 }}}
 
-if(hard==1 || loadgame==1){
+if(hard==1){
       printf("\n enter the dim (5 or 6 or 7) : ");
       scanf("%s",&dim[0]);
     while(1){
