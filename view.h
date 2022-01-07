@@ -49,9 +49,10 @@ printf(RED"\nTIME = %d : %d \n"RESET,t.mins,t.seconds);
 printf(RED"\nINSTUCTIONS:\n"RESET);
 printf(CYAN"TO MOVE:\npress any of the 4 arrow keys to move along the dots \nTO DRAW:\npress space to select the dot"RESET);
 if(loadgame==0 && player2==1){
-printf(CYAN"\nfor undo press:u\nfor redo press:r\nfor exit the game press esc"RESET);
+printf(CYAN"\nfor undo press:u\nfor redo press:r\nfor exit the game and save it press esc or close game window"RESET);
 }
 if(num_of_lines==0){
+
     if(play1.score>play2.score){
         printf(CYAN"\n\n\n\n\n\n\n\t\tCONGRATLATIONS "RESET);
         for(int i=0;play1.name[i]!='\0' && play1.name[i]!='\n';i++){
@@ -59,7 +60,8 @@ if(num_of_lines==0){
         }
         printf( YELLOW"\t\tYOUR SCORE IS: %d"RESET,play1.score);
         SDL_Quit();
-    }else if (play1.score<play2.score &&strcmp(compt,play2.name)!=0){
+    }
+       else if (play1.score<play2.score &&strcmp(compt,play2.name)!=0&&player2==1){
          printf(CYAN"\n\n\n\n\n\n\n\t\tCONGRATLATIONS "RESET);
         for(int i=0;play2.name[i]!='\0' && play2.name[i]!='\n';i++){
         printf(MAGENTA"%c"RESET,play2.name[i]);

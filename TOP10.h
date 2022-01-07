@@ -17,7 +17,7 @@ fprintf(top10,topn[i].name);
 fprintf(top10,"%d\n",topn[i].score);
 fclose(top10);
 }
-if(play1.score<play2.score && strcmp(compt,play2.name)!=0){
+if(play1.score<play2.score && strcmp(compt,play2.name)!=0&&player2==1){
 
        for(int i=0;i<50;i++){
         if(topn[i].score==0){
@@ -42,7 +42,7 @@ fclose(top10);
 }
 }
 char temp[50]={};
-void overwrriten(){//lsa
+void overwrriten(){
 for(int i=0;i<50;i++){
         for(int x=i+1;x<50;x++){
             if(strcmp(topn[i].name,topn[x].name)==0 && strcmp(topn[i].name,temp)!=0 && strcmp(topn[x].name,temp)!=0){
