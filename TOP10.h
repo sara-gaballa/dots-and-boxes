@@ -14,11 +14,10 @@ if(play1.score>play2.score){
         break;}
         }
 fprintf(top10,topn[i].name);
-fprintf(top10,"\n");
-fprintf(top10,"%d\n",topn[i].score);
+fprintf(top10,"\n%d\n",topn[i].score);
 fclose(top10);
 }
-if(play1.score<play2.score && strcmp(compt,play2.name)!=0){
+if(play1.score<play2.score && strcmp(compt,play2.name)!=0&&player2==1){
 
        for(int i=0;i<200;i++){
         if(topn[i].score==0){
@@ -27,8 +26,7 @@ if(play1.score<play2.score && strcmp(compt,play2.name)!=0){
         break;}
         }
 fprintf(top10,topn[i].name);
-fprintf(top10,"\n");
-fprintf(top10,"%d\n",topn[i].score);
+fprintf(top10,"\n%d\n",topn[i].score);
 fclose(top10);
 }
 
@@ -39,6 +37,7 @@ FILE *top10;
 top10=fopen("top10.txt","r");
 for(int i=0;i<200;i++){
 fgets(topn[i].name,50,top10);
+fscanf(top10,"\n");
 fscanf(top10,"%d",&topn[i].score);}
 fclose(top10);
 }

@@ -61,7 +61,7 @@ if(num_of_lines==0){
         printf( YELLOW"\t\tYOUR SCORE IS: %d"RESET,play1.score);
         SDL_Quit();
     }
-       else if (play1.score<play2.score &&strcmp(compt,play2.name)!=0){
+       else if (play1.score<play2.score &&strcmp(compt,play2.name)!=0&&player2==1){
          printf(CYAN"\n\n\n\n\n\n\n\t\tCONGRATLATIONS "RESET);
         for(int i=0;play2.name[i]!='\0' && play2.name[i]!='\n';i++){
         printf(MAGENTA"%c"RESET,play2.name[i]);
