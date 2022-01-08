@@ -62,7 +62,7 @@ view();
 return flag;//the result of the function
 }
 void clean(){//remove all data for returning to main and play again
-for(int i =0;i<50;i++){
+for(int i =0;i<200;i++){
 topn[i]={};
 topn[i].score=0;}
 easy=0;
