@@ -25,10 +25,10 @@ int x=0,y=0,ox=-1,oy=-1;
 bool color;
 }p1,p2;
 struct tops{
-char name[50];
+char name[50] = {};
 int score=0;
 };
-struct tops topn[50];
+struct tops topn[200];
 struct compmoves{
 int x1,y1,x2,y2;
 }comp;
